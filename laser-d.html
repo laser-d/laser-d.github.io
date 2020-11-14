@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction &#8212; Laser-D Language  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Laser-D Programming Language’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Laser-D is a computer programming language based on the D programming Language. The language differs from D in some major ways: Laser-D does not support
+garbage collection and does not provide a runtime. As a consequence, Laser-D does not support certain features of the D programming language. Laser-D
+does not support the standard D library phobos for the same reason.</p>
+<p>Here is a hello world program in Laser-D.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">core.stdc.stdio</span> <span class="p">:</span> <span class="n">printf</span><span class="p">;</span>
+
+<span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello World!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="basic-concepts">
+<h1>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h1>
+<p>Laser-D programs are structured as modules that can be compiled separately and linked with external libraries to create
+native libraries or executables.</p>
+<p>Each Laser-D source file defines a single module.</p>
+<p>Each laser-D module contains one or more declarations of entities.</p>
+<p>An entity is a named variable, function, structure or union type, enumeration type, template, mixin template or an external symbol.</p>
+<p>Entities in a Laser-D module can have linkage that specifies how these entities may be accessed from other Laser-D modules, or from programs in other
+other languages such as C or C++.</p>
+</div>
+<div class="section" id="source-code-representation">
+<h1>Source Code Representation<a class="headerlink" href="#source-code-representation" title="Permalink to this headline">¶</a></h1>
+<p>Source code must be Unicode text encoded in UTF-8.</p>
+<div class="section" id="characters">
+<h2>Characters<a class="headerlink" href="#characters" title="Permalink to this headline">¶</a></h2>
+<p>The following terms are used to denote specific Unicode character classes:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">newline</span></code></dt><dd><p>the Unicode code point U+000A</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unicode_char</span></code></dt><dd><p>an arbitrary Unicode code point except <code class="docutils literal notranslate"><span class="pre">newline</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">universal-character-name</span></code></dt><dd><p>as defined in ISO/IEC 9899:1999(E) Appendix D of the C99 Standard</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">nondigit</span></code></p>
+<blockquote>
+<div><p>one of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span> <span class="n">i</span> <span class="n">j</span> <span class="n">k</span> <span class="n">l</span> <span class="n">m</span> <span class="n">n</span> <span class="n">o</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="n">t</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+<span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="n">D</span> <span class="n">E</span> <span class="n">F</span> <span class="n">G</span> <span class="n">H</span> <span class="n">I</span> <span class="n">J</span> <span class="n">K</span> <span class="n">L</span> <span class="n">M</span> <span class="n">N</span> <span class="n">O</span> <span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="n">S</span> <span class="n">T</span> <span class="n">U</span> <span class="n">V</span> <span class="n">W</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span>
+<span class="n">_</span>
+</pre></div>
+</div>
+<p>universal-character-name</p>
+</div></blockquote>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">digit</span></code></dt><dd><p>one of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>The underscore character <code class="docutils literal notranslate"><span class="pre">_</span></code> (U+005F) is considered a letter.</p>
+</div>
+</div>
+<div class="section" id="lexical-elements">
+<h1>Lexical Elements<a class="headerlink" href="#lexical-elements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>The language has following keywords.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abstract</span>    <span class="n">alias</span>        <span class="n">align</span>          <span class="n">asm</span>          <span class="k">assert</span>      <span class="n">auto</span>
+<span class="n">body</span>        <span class="nb">bool</span>         <span class="k">break</span>          <span class="n">byte</span>         <span class="n">case</span>        <span class="n">cast</span>
+<span class="n">catch</span>       <span class="n">cdouble</span>      <span class="n">cent</span>           <span class="n">cfloat</span>       <span class="n">char</span>        <span class="k">class</span>
+<span class="nc">const</span>       <span class="k">continue</span>     <span class="n">creal</span>          <span class="n">dchar</span>        <span class="n">debug</span>       <span class="n">default</span>
+<span class="n">delegate</span>    <span class="n">delete</span>       <span class="n">deprecated</span>     <span class="n">do</span>           <span class="n">double</span>
+<span class="k">else</span>        <span class="n">enum</span>         <span class="n">export</span>         <span class="n">extern</span>       <span class="n">false</span>       <span class="n">final</span>
+<span class="k">finally</span>     <span class="nb">float</span>        <span class="k">for</span>            <span class="n">foreach</span>      <span class="n">foreach_reverse</span>    <span class="n">function</span>
+<span class="n">goto</span>        <span class="n">idouble</span>      <span class="k">if</span>             <span class="n">ifloat</span>       <span class="n">immutable</span>    <span class="kn">import</span>
+<span class="nn">in</span>          <span class="n">inout</span>        <span class="nb">int</span>            <span class="n">interface</span>    <span class="n">invariant</span>    <span class="n">ireal</span>
+<span class="ow">is</span>          <span class="n">lazy</span>         <span class="n">long</span>           <span class="n">macro</span>        <span class="n">mixin</span>        <span class="n">module</span>
+<span class="n">new</span>         <span class="n">nothrow</span>      <span class="n">null</span>           <span class="n">out</span>          <span class="n">override</span>     <span class="n">package</span>
+<span class="n">pragma</span>      <span class="n">private</span>      <span class="n">protected</span>      <span class="n">public</span>       <span class="n">pure</span>
+<span class="n">real</span>        <span class="n">ref</span>          <span class="k">return</span>         <span class="n">scope</span>        <span class="n">shared</span>       <span class="n">short</span>
+<span class="n">static</span>      <span class="n">struct</span>       <span class="nb">super</span>          <span class="n">switch</span>       <span class="n">synchronized</span>
+<span class="n">template</span>    <span class="n">this</span>         <span class="n">throw</span>          <span class="n">true</span>         <span class="k">try</span>          <span class="n">typeid</span>
+<span class="n">typeof</span>      <span class="n">ubyte</span>        <span class="n">ucent</span>          <span class="n">uint</span>         <span class="n">ulong</span>        <span class="n">union</span>
+<span class="n">unittest</span>    <span class="n">ushort</span>       <span class="n">version</span>        <span class="n">void</span>         <span class="n">wchar</span>        <span class="k">while</span>
+<span class="k">with</span>        <span class="n">__FILE__</span>     <span class="n">__FILE_FULL_PATH__</span>          <span class="n">__MODULE__</span>   <span class="n">__LINE__</span>
+<span class="n">__FUNCTION__</span>             <span class="n">__PRETTY_FUNCTION__</span>         <span class="n">__gshared</span>    <span class="n">__traits</span>
+<span class="n">__vector</span>    <span class="n">__parameters</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operators-and-punctuation">
+<h2>Operators and Punctuation<a class="headerlink" href="#operators-and-punctuation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/     /=    .    ..    ...   &amp;
+&amp;=    &amp;&amp;    |    |=    ||    -
+-=    --    +    +=    ++    &lt;
+&lt;=    &lt;&lt;    &lt;&lt;=  &gt;     &gt;=    &gt;&gt;=
+&gt;&gt;&gt;=  &gt;&gt;    &gt;&gt;&gt;  !     !=    (
+)     [     ]    {     }     ?
+,     ;     :    $     =     ==
+*     *=    %    %=    ^     ^=
+^^    ^^=   ~    ~=    @    =&gt;
+#
+</pre></div>
+</div>
+</div>
+<div class="section" id="identifiers">
+<h2>Identifiers<a class="headerlink" href="#identifiers" title="Permalink to this headline">¶</a></h2>
+<p>An identifier is a sequence chracters with a <code class="docutils literal notranslate"><span class="pre">nondigit</span></code> character followed by <code class="docutils literal notranslate"><span class="pre">nondigit</span></code> or <code class="docutils literal notranslate"><span class="pre">digit</span></code> characters.</p>
+<p>Lowercase and uppercase letters are distinct. There is no specific limit on the maximum length of an identifier.</p>
+</div>
+<div class="section" id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>Comments serve as program documentation. There are two forms:</p>
+<ul class="simple">
+<li><p>Line comments start with the character sequence // and stop at the end of the line.</p></li>
+<li><p>General comments start with the character sequence /* and stop with the first subsequent character sequence */.</p></li>
+</ul>
+</div>
+<div class="section" id="string-literals">
+<h2>String Literals<a class="headerlink" href="#string-literals" title="Permalink to this headline">¶</a></h2>
+<p>A string literal is either a double quoted string, a wysiwyg quoted string, a delimited string, a token string, or a hex string.</p>
+</div>
+</div>
+<div class="section" id="names">
+<h1>Names<a class="headerlink" href="#names" title="Permalink to this headline">¶</a></h1>
+<p>In a Laser-D program, identifiers can be used to denote:</p>
+<ul class="simple">
+<li><p>modules</p></li>
+<li><p>structures and union types</p></li>
+<li><p>template types and template parameters</p></li>
+<li><p>functions and function arguments</p></li>
+<li><p>aliases</p></li>
+<li><p>labels</p></li>
+<li><p>variables</p></li>
+<li><p>mixin templates</p></li>
+<li><p>import bindings</p></li>
+<li><p>attributes</p></li>
+<li><p>external symbols</p></li>
+</ul>
+<p>The same identifier can denote different entities at different points in the program.</p>
+<div class="section" id="scope">
+<h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
+<p>For each different entity that an identifier designates, the identifier is visible (i.e., can be used) only within a region of program text
+called its scope. There are following kinds of scopes: global, module, struct or union type, template type, function, block.</p>
+<p>Different entities designated by the same identifier either have different scopes, or the identifiers must be in an overload set.</p>
+</div>
+</div>
+<div class="section" id="modules">
+<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<p>Each Laser-D source file represents a distinct module. Each module has a name, optionally qualified with a package prefix.
+The module name, if not declared explicitly using the <code class="docutils literal notranslate"><span class="pre">module</span></code> declaration, is derived from the source file name.</p>
+<p>If present, the <code class="docutils literal notranslate"><span class="pre">module</span></code> declaration must be the first and only such declaration in the source file,
+and may be preceded only by comments and #line directives.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ModuleDeclaration</span><span class="p">:</span>
+    <span class="n">module</span> <span class="n">ModuleFullyQualifiedName</span> <span class="p">;</span>
+
+<span class="n">ModuleFullyQualifiedName</span><span class="p">:</span>
+    <span class="n">ModuleName</span>
+    <span class="n">Packages</span> <span class="o">.</span> <span class="n">ModuleName</span>
+
+<span class="n">ModuleName</span><span class="p">:</span>
+    <span class="n">Identifier</span>
+
+<span class="n">Packages</span><span class="p">:</span>
+    <span class="n">PackageName</span>
+    <span class="n">Packages</span> <span class="o">.</span> <span class="n">PackageName</span>
+
+<span class="n">PackageName</span><span class="p">:</span>
+    <span class="n">Identifier</span>
+</pre></div>
+</div>
+<p>The fully qualified module name forms part of the qualified name of every entity declared in that module. Thus two entities with identical names in different
+modules can be disambiguated using the fully qualified names of the entities.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Laser-D Language</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#source-code-representation">Source Code Representation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#characters">Characters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#lexical-elements">Lexical Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#keywords">Keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operators-and-punctuation">Operators and Punctuation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#identifiers">Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#string-literals">String Literals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#names">Names</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scope">Scope</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#modules">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Laser-D Programming Language’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Dibyendu Majumdar, D Language Foundation.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/laser-d.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
