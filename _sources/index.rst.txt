@@ -10,7 +10,8 @@ Welcome to Laser-D Programming Language's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   intro
+   laser-d
+   
 
 Indices and tables
 ==================
