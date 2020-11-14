@@ -33,8 +33,17 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>Laser-D is a computer programming language based on the D programming Language. The language differs from D in one major way: Laser-D does not support
+<p>Laser-D is a computer programming language based on the D programming Language. The language differs from D in two major ways: Laser-D does not support
 garbage collection and does not provide a runtime. As a consequence, Laser-D does not support certain features of the D programming language.</p>
+<p>Here is a hello world program in Laser-D.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">core.stdc.stdio</span> <span class="p">:</span> <span class="n">printf</span><span class="p">;</span>
+
+<span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello World!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 
 
