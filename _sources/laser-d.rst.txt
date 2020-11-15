@@ -349,6 +349,8 @@ A string type is simply an alias for an immutable array of ``char``, ``wchar`` o
 
 While a string literal has a ``0`` byte terminator, the string type does not.
 
+Laser-D's built-in comparison operators compare strings as a sequence of Unicode code-points. 
+
 Struct types
 ------------
 
