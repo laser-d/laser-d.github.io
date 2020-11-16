@@ -210,7 +210,7 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 <span class="n">BasicType</span>    <span class="o">=</span> <span class="s2">&quot;void&quot;</span> <span class="o">|</span> <span class="s2">&quot;bool&quot;</span> <span class="o">|</span> <span class="s2">&quot;byte&quot;</span> <span class="o">|</span> <span class="s2">&quot;ubyte&quot;</span> <span class="o">|</span> <span class="s2">&quot;short&quot;</span> <span class="o">|</span> <span class="s2">&quot;ushort&quot;</span> <span class="o">|</span> <span class="s2">&quot;int&quot;</span> <span class="o">|</span> <span class="s2">&quot;uint&quot;</span> <span class="o">|</span> <span class="s2">&quot;long&quot;</span> <span class="o">|</span> <span class="s2">&quot;ulong&quot;</span> <span class="o">|</span>
                <span class="s2">&quot;cent&quot;</span> <span class="o">|</span> <span class="s2">&quot;ucent&quot;</span> <span class="o">|</span> <span class="s2">&quot;char&quot;</span> <span class="o">|</span> <span class="s2">&quot;wchar&quot;</span> <span class="o">|</span> <span class="s2">&quot;dchar&quot;</span> <span class="o">|</span> <span class="s2">&quot;float&quot;</span> <span class="o">|</span> <span class="s2">&quot;double&quot;</span> <span class="o">|</span> <span class="s2">&quot;real&quot;</span> <span class="o">|</span>
                <span class="s2">&quot;ifloat&quot;</span> <span class="o">|</span> <span class="s2">&quot;idouble&quot;</span> <span class="o">|</span> <span class="s2">&quot;ireal&quot;</span> <span class="o">|</span> <span class="s2">&quot;cfloat&quot;</span> <span class="o">|</span> <span class="s2">&quot;cdouble&quot;</span> <span class="o">|</span> <span class="s2">&quot;creal&quot;</span> <span class="o">.</span>
-<span class="n">DerivedType</span>  <span class="o">=</span> <span class="n">ArrayType</span> <span class="o">|</span> <span class="n">StructType</span> <span class="o">|</span> <span class="n">PointerType</span> <span class="o">|</span> <span class="n">ReferenceType</span> <span class="o">|</span> <span class="n">FunctionType</span> <span class="o">|</span> <span class="n">UnionType</span> <span class="o">|</span> <span class="n">DelegateType</span> <span class="o">.</span>
+<span class="n">DerivedType</span>  <span class="o">=</span> <span class="n">ArrayType</span> <span class="o">|</span> <span class="n">StructType</span> <span class="o">|</span> <span class="n">PointerType</span> <span class="o">|</span> <span class="n">ReferenceType</span> <span class="o">|</span> <span class="n">FunctionType</span> <span class="o">|</span> <span class="n">UnionType</span> <span class="o">|</span> <span class="n">DelegateType</span> <span class="o">|</span> <span class="n">FunctionPointerType</span> <span class="o">.</span>
 </pre></div>
 </div>
 <div class="section" id="void-type">
@@ -267,8 +267,8 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 </div>
 <div class="section" id="pointer-types">
 <h2>Pointer types<a class="headerlink" href="#pointer-types" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PointerType</span> <span class="o">=</span> <span class="n">BaseType</span> <span class="s2">&quot;*&quot;</span>
-<span class="n">BaseType</span> <span class="o">=</span> <span class="n">Type</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PointerType</span> <span class="o">=</span> <span class="n">BaseType</span> <span class="s2">&quot;*&quot;</span> <span class="o">.</span>
+<span class="n">BaseType</span> <span class="o">=</span> <span class="n">Type</span> <span class="o">.</span>
 </pre></div>
 </div>
 <p>A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer.
@@ -295,8 +295,8 @@ The length of array <code class="docutils literal notranslate"><span class="pre"
 </div>
 <div class="section" id="slice-types">
 <h2>Slice Types<a class="headerlink" href="#slice-types" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SliceType</span>       <span class="o">=</span> <span class="n">BaseType</span> <span class="s2">&quot;[&quot;</span> <span class="s2">&quot;]&quot;</span>
-<span class="n">BaseType</span>        <span class="o">=</span> <span class="n">Type</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SliceType</span>       <span class="o">=</span> <span class="n">BaseType</span> <span class="s2">&quot;[&quot;</span> <span class="s2">&quot;]&quot;</span> <span class="o">.</span>
+<span class="n">BaseType</span>        <span class="o">=</span> <span class="n">Type</span> <span class="o">.</span>
 </pre></div>
 </div>
 <p>A slice is a descriptor for a contiguous segment of an underlying array and provides access to a numbered sequence of elements from that array.
@@ -321,8 +321,98 @@ array and with other slices of the same array; by contrast, distinct arrays alwa
 <p>While a string literal has a <code class="docutils literal notranslate"><span class="pre">0</span></code> byte terminator, the string type does not.</p>
 <p>Laser-D’s built-in comparison operators compare strings as a sequence of Unicode code-points.</p>
 </div>
+<div class="section" id="function-types">
+<h2>Function types<a class="headerlink" href="#function-types" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FunctionType</span>         <span class="o">=</span> <span class="n">FunctionSignature</span> <span class="s2">&quot;;&quot;</span> <span class="o">.</span>
+<span class="n">FunctionSignature</span>    <span class="o">=</span> <span class="p">[</span> <span class="n">FunctionStorageClass</span> <span class="p">]</span> <span class="p">(</span> <span class="n">Result</span> <span class="o">|</span> <span class="n">auto</span> <span class="p">)</span> <span class="n">identifier</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+<span class="n">Result</span>               <span class="o">=</span> <span class="n">Type</span> <span class="o">.</span>
+<span class="n">Parameters</span>           <span class="o">=</span> <span class="p">[</span> <span class="n">ParameterList</span> <span class="p">]</span> <span class="o">.</span>
+<span class="n">ParameterList</span>        <span class="o">=</span> <span class="n">ParameterDecl</span> <span class="p">{</span> <span class="s2">&quot;,&quot;</span> <span class="n">ParameterDecl</span> <span class="p">}</span> <span class="o">.</span>
+<span class="n">ParameterDecl</span>        <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="n">ParameterAttribute</span> <span class="p">}</span> <span class="p">]</span> <span class="n">Type</span> <span class="n">identifier</span> <span class="o">.</span>
+<span class="n">ParameterAttribute</span>   <span class="o">=</span> <span class="s2">&quot;in&quot;</span> <span class="o">|</span> <span class="s2">&quot;out&quot;</span> <span class="o">|</span> <span class="s2">&quot;ref&quot;</span> <span class="o">|</span> <span class="s2">&quot;return&quot;</span> <span class="o">|</span> <span class="s2">&quot;scope&quot;</span> <span class="o">.</span>
+<span class="n">FunctionStorageClass</span> <span class="o">=</span> <span class="s2">&quot;ref&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>A function type is used to declare a name as a function, without defining the body of the function.</p>
+<div class="section" id="parameter-attributes">
+<h3>Parameter Attributes<a class="headerlink" href="#parameter-attributes" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">in</span></code></dt><dd><p>A parameter marked as <code class="docutils literal notranslate"><span class="pre">in</span></code> behaves as if has been passed by value.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ref</span></code></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">ref</span></code> parameter is passed by reference.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">out</span></code></dt><dd><p>An <code class="docutils literal notranslate"><span class="pre">out</span></code> parameter is passed by reference and initialized upon function entry with the default value of its type</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">scope</span></code></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">scope</span></code> parameter must not escape the function call (e.g. by being assigned to a global variable). Ignored for any parameter that is
+passed by value.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">return</span></code></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">return</span></code> parameter may be returned or copied to the first parameter, but otherwise does not escape from the function.</p>
+</dd>
+</dl>
+<p>The attributes <code class="docutils literal notranslate"><span class="pre">in</span></code>, <code class="docutils literal notranslate"><span class="pre">ref</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> are mutually exclusive.</p>
+</div>
+</div>
+<div class="section" id="functionpointer-type">
+<h2>FunctionPointer type<a class="headerlink" href="#functionpointer-type" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FunctionPointerType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;function&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>A function pointer type holds a pointer to a function.</p>
+</div>
+<div class="section" id="delegatetype">
+<h2>DelegateType<a class="headerlink" href="#delegatetype" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DelegateType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;delegate&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The delegate type holds a pair of pointers: a context and a pointer to function.</p>
+</div>
 <div class="section" id="struct-types">
 <h2>Struct types<a class="headerlink" href="#struct-types" title="Permalink to this headline">¶</a></h2>
+<p>A struct declaration introduces the struct name as a type into the scope where it is declared and hides any struct,
+variable, function, or other declaration of that name in an enclosing scope.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StructType</span>    <span class="o">=</span> <span class="s2">&quot;struct&quot;</span> <span class="n">identifier</span> <span class="p">[</span> <span class="s2">&quot;{&quot;</span> <span class="p">{</span> <span class="n">MemberDecl</span> <span class="p">}</span> <span class="s2">&quot;}&quot;</span> <span class="p">]</span> <span class="o">.</span>
+<span class="n">MemberDecl</span>    <span class="o">=</span> <span class="n">DataMember</span> <span class="o">|</span> <span class="n">Constructor</span> <span class="o">|</span> <span class="n">Destructor</span> <span class="o">|</span> <span class="n">Method</span> <span class="o">|</span> <span class="n">StaticMethod</span> <span class="o">.</span>
+<span class="n">DataMember</span>    <span class="o">=</span> <span class="n">Type</span> <span class="n">identifier</span> <span class="p">[</span> <span class="s2">&quot;=&quot;</span> <span class="n">Initializer</span> <span class="p">]</span> <span class="s2">&quot;;&quot;</span> <span class="o">.</span>
+<span class="n">Constructor</span>   <span class="o">=</span> <span class="s2">&quot;this&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="n">FunctionBody</span> <span class="o">.</span>
+<span class="n">Destructor</span>    <span class="o">=</span> <span class="s2">&quot;~&quot;</span> <span class="s2">&quot;this&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="s2">&quot;)&quot;</span> <span class="n">FunctionBody</span> <span class="o">.</span>
+<span class="n">Method</span>        <span class="o">=</span> <span class="n">FunctionSignature</span> <span class="n">FunctionBody</span> <span class="o">.</span>
+<span class="n">StaticMethod</span>  <span class="o">=</span> <span class="s2">&quot;static&quot;</span> <span class="n">Method</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The data members of a struct are allocated so that later members have higher addresses within a struct object.
+Implementation alignment requirements might cause two adjacent members not to be allocated immediately after each other.</p>
+<div class="section" id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
+<p>A variable of struct type is by default initialized to the values specified as the initializer for each data member, or if no such
+value was specified, then to the default initial value of the data member type.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">S</span> <span class="p">{</span> <span class="nb">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="nb">int</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">S</span> <span class="n">x</span><span class="p">;</span> <span class="o">//</span> <span class="n">x</span><span class="o">.</span><span class="n">a</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">to</span> <span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">b</span> <span class="n">to</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h3>
+<p>A constructor is defined with a function name of <code class="docutils literal notranslate"><span class="pre">this</span></code> and must have no return value. At least one parameter must be specified.
+A struct constructor can be invoked by the name of the struct followed by its parameters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">S</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="n">this</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">,</span> <span class="nb">int</span> <span class="n">b</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">S</span> <span class="n">a</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="o">//</span> <span class="n">calls</span> <span class="n">S</span><span class="o">.</span><span class="n">this</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>  <span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">S</span> <span class="n">b</span> <span class="o">=</span> <span class="n">S</span><span class="p">();</span>  <span class="o">//</span> <span class="n">default</span> <span class="n">initialized</span><span class="p">:</span>    <span class="n">b</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">S</span> <span class="n">c</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">//</span> <span class="n">error</span><span class="p">,</span> <span class="n">matching</span> <span class="n">this</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="union-types">
 <h2>Union types<a class="headerlink" href="#union-types" title="Permalink to this headline">¶</a></h2>
@@ -385,6 +475,9 @@ or references.</p>
 <li class="toctree-l2"><a class="reference internal" href="#array-types">Array types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slice-types">Slice Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#string-type">String type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-types">Function types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functionpointer-type">FunctionPointer type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delegatetype">DelegateType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#struct-types">Struct types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#union-types">Union types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#implicit-conversions">Implicit Conversions</a></li>
