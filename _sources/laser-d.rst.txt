@@ -16,7 +16,6 @@ Here is a hello world program in Laser-D.
         printf("Hello World!\n");
     }
 
-
 Notation
 ========
 The syntax is specified using Extended Backus-Naur Form (EBNF)::
@@ -55,7 +54,7 @@ Each laser-D module contains one or more declarations of entities.
 
 An entity is a named variable, function, structure or union type, enumeration type, template, mixin template or an external symbol.
 
-Entities in a Laser-D module can have linkage that specifies how these entities may be accessed from other Laser-D modules, or from programs in other 
+Entities in a Laser-D module can have linkage specification that defined how these entities may be accessed from other Laser-D modules, or from programs in other 
 other languages such as C or C++.
 
 Source Code Representation
@@ -93,26 +92,35 @@ The language has following keywords.
 
 ::
 
-    abstract    alias        align          asm          assert      auto
-    body        bool         break          byte         case        cast
-    catch       cdouble      cent           cfloat       char        class
-    const       continue     creal          dchar        debug       default
-    delegate    delete       deprecated     do           double
-    else        enum         export         extern       false       final
-    finally     float        for            foreach      foreach_reverse    function
-    goto        idouble      if             ifloat       immutable    import
-    in          inout        int            interface    invariant    ireal
-    is          lazy         long           macro        mixin        module
-    new         nothrow      null           out          override     package
-    pragma      private      protected      public       pure 
-    real        ref          return         scope        shared       short
-    static      struct       super          switch       synchronized
-    template    this         throw          true         try          typeid
-    typeof      ubyte        ucent          uint         ulong        union
-    unittest    ushort       version        void         wchar        while
-    with        __FILE__     __FILE_FULL_PATH__          __MODULE__   __LINE__
-    __FUNCTION__             __PRETTY_FUNCTION__         __gshared    __traits     
-    __vector    __parameters
+    alias         align        assert        auto         bool         
+    break         byte         case          cast         cdouble      
+    cfloat        char         const         continue     creal          
+    dchar         debug        default       delegate     do           
+    double        else         enum          export       extern       
+    false         float        for           foreach      foreach_reverse    
+    function      goto         idouble       if           ifloat 
+    immutable     import       in            inout        int            
+    interface     ireal        is            long         mixin        
+    module        null         out           pragma       real
+    ref           return       scope         shared       short
+    static        struct       super         switch       template    
+    this          true         typeof        ubyte        uint         
+    ulong         union        unittest      ushort       version        
+    void          wchar        while
+    __FILE__                   __FILE_FULL_PATH__         __MODULE__   __LINE__
+    __FUNCTION__               __PRETTY_FUNCTION__        __gshared    __traits     
+    __parameters
+
+The following are reserved words for compatibility with D, however these are not keywords in Laser-D.
+
+::
+
+    abstract      asm          body           catch       cent         class
+    debug         delete       deprecated     final       interface    invariant
+    lazy          mixin        new            nothrow     override     package
+    private       protected    public         pragma      pure         super  
+    synchronized  throw        try            typeid      ucent        with
+    __vector
 
 
 Operators and Punctuation
@@ -149,8 +157,8 @@ Comments
 
 Comments serve as program documentation. There are two forms:
 
-* Line comments start with the character sequence // and stop at the end of the line.
-* General comments start with the character sequence /\* and stop with the first subsequent character sequence \*/.
+* Line comments start with the character sequence ``//`` and stop at the end of the line.
+* General comments start with the character sequence ``/*`` and stop with the first subsequent character sequence ``*/``.
 
 String Literals
 ---------------
@@ -182,6 +190,9 @@ called its scope. There are following kinds of scopes: global, module, struct or
 
 Different entities designated by the same identifier either have different scopes, or the identifiers must be in an overload set.
 
+Declarations
+------------
+All names must be declared prior to use, or imported from another module.
 
 Modules
 =======
@@ -190,7 +201,7 @@ Each Laser-D source file represents a distinct module. Each module has a name, o
 The module name, if not declared explicitly using the ``module`` declaration, is derived from the source file name.  
 
 If present, the ``module`` declaration must be the first and only such declaration in the source file, 
-and may be preceded only by comments and #line directives.
+and may be preceded only by comments and ``#line`` directives.
 
 ::
 
@@ -210,12 +221,12 @@ A type determines a set of values together with operations and methods specific 
 ::
 
     Type         = BasicType | DerivedType | TemplateType .
-    BasicType    = "void" | "bool" | "byte" | "ubyte" | "short" | "ushort" | "int" | "uint" | "long" | "ulong" | 
-                   "cent" | "ucent" | "char" | "wchar" | "dchar" | "float" | "double" | "real" |
-                   "ifloat" | "idouble" | "ireal" | "cfloat" | "cdouble" | "creal" .
-    DerivedType  = ArrayType | StructType | PointerType | ReferenceType | FunctionType | UnionType | DelegateType | FunctionPointerType .
-
-
+    BasicType    = "void" | "bool" | "byte" | "ubyte" | "short" | "ushort" | 
+                   "int" | "uint" | "long" | "ulong" | "char" | "wchar" | 
+                   "dchar" | "float" | "double" | "real" | "ifloat" | 
+                   "idouble" | "ireal" | "cfloat" | "cdouble" | "creal" .
+    DerivedType  = ArrayType | StructType | PointerType | ReferenceType | 
+                   UnionType .
 
 Void type
 ---------
@@ -223,6 +234,7 @@ Void type
 ::
 
     Keyword     Default Initializer         Description
+    -------     -------------------         -----------
     void        -	                        no type
 
 Boolean types
@@ -231,11 +243,10 @@ Boolean types
 ::
 
     Keyword     Default Initializer         Description
+    -------     -------------------         -----------
     bool        false	                    boolean value
 
 The ``bool`` type is a byte-size type that can only hold the value ``true`` or ``false``.
-
-The operators that can accept operands of type ``bool`` are: ``& |``, ``^``, ``&=``, ``|=``, ``^=``, ``!``, ``&&``, ``||``, and ``?:``.
 
 
 Integral types
@@ -244,6 +255,7 @@ Integral types
 ::
 
     Keyword     Default Initializer         Description
+    -------     -------------------         -----------
     byte        0                           signed 8 bits
     ubyte       0u                          unsigned 8 bits
     short       0                           signed 16 bits
@@ -265,9 +277,10 @@ Floating-point types
 ::
 
     Keyword     Default Initializer         Description
+    -------     -------------------         -----------
     float       float.nan                   32 bit floating point
     double      double.nan                  64 bit floating point
-    real        real.nan                    largest FP size implemented in hardwareImplementation Note: 80 bits for x86 CPUs or double size, whichever is larger
+    real        real.nan                    largest FP size implemented in hardware
 
     ifloat      float.nan*1.0i              imaginary float
     idouble     double.nan*1.0i             imaginary double
@@ -276,17 +289,6 @@ Floating-point types
     cdouble     double.nan+double.nan*1.0i  complex double
     creal       real.nan+real.nan*1.0i      complex real
 
-
-Pointer types
--------------
-
-::
-
-    PointerType = BaseType "*" .
-    BaseType = Type .
-
-A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer. 
-The value of an uninitialized pointer is ``null``. 
 
 Enum types
 ----------
@@ -351,20 +353,29 @@ While a string literal has a ``0`` byte terminator, the string type does not.
 
 Laser-D's built-in comparison operators compare strings as a sequence of Unicode code-points. 
 
+Pointer types
+-------------
+
+::
+
+    PointerType = BaseType "*" | FunctionType | DelegateType .
+    BaseType = Type .
+
+A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer. 
+The value of an uninitialized pointer is ``null``. 
+
 Function types
 --------------
 ::
 
-    FunctionType         = FunctionSignature ";" .
-    FunctionSignature    = [ FunctionStorageClass ] ( Result | auto ) identifier "(" Parameters ")" .
+    FunctionType         = ( Result | auto ) "function" "(" Parameters ")" .
     Result               = Type .
     Parameters           = [ ParameterList ] .
     ParameterList        = ParameterDecl { "," ParameterDecl } .
     ParameterDecl        = [ { ParameterAttribute } ] Type identifier .
-    ParameterAttribute   = "in" | "out" | "ref" | "return" | "scope" .
-    FunctionStorageClass = "ref" .
+    ParameterAttribute   = "in" | "out" | "ref" .
 
-A function type is used to declare a name as a function, without defining the body of the function.
+A function type holds a pointer to a function. 
 
 Parameter Attributes
 ++++++++++++++++++++
@@ -375,31 +386,8 @@ Parameter Attributes
     A ``ref`` parameter is passed by reference.
 ``out``	
     An ``out`` parameter is passed by reference and initialized upon function entry with the default value of its type
-``scope``	
-    A ``scope`` parameter must not escape the function call (e.g. by being assigned to a global variable). Ignored for any parameter that is 
-    passed by value.
-``return``	
-    A ``return`` parameter may be returned or copied to the first parameter, but otherwise does not escape from the function.
 
 The attributes ``in``, ``ref`` and ``out`` are mutually exclusive.
-
-FunctionPointer type
---------------------
-
-::
-
-    FunctionPointerType  = Result "function" "(" Parameters ")" .
-
-A function pointer type holds a pointer to a function. 
-
-DelegateType
-------------
-
-::
-
-    DelegateType  = Result "delegate" "(" Parameters ")" .
-
-The delegate type holds a pair of pointers: a context and a pointer to function. 
 
 
 Struct types
@@ -415,7 +403,7 @@ variable, function, or other declaration of that name in an enclosing scope.
     DataMember    = Type identifier [ "=" Initializer ] ";" .
     Constructor   = "this" "(" Parameters ")" FunctionBody .
     Destructor    = "~" "this" "(" ")" FunctionBody .
-    Method        = FunctionSignature FunctionBody .
+    Method        = ( Result | auto ) identifier "(" Parameters ")" FunctionBody .
     StaticMethod  = "static" Method .
 
 The data members of a struct are allocated so that later members have higher addresses within a struct object. 
@@ -455,10 +443,19 @@ A struct constructor can be invoked by the name of the struct followed by its pa
         S c = S(1); // error, matching this(int) not found
     }
 
+DelegateType
+------------
+
+::
+
+    DelegateType  = Result "delegate" "(" Parameters ")" .
+
+The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method. 
 
     
 Union types
 -----------
+
 
 
 

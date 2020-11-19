@@ -1,17 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to Laser-D Programming Language’s documentation! &#8212; Laser-D Language  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction" href="laser-d.html" />
@@ -53,6 +54,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="laser-d.html#names">Names</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="laser-d.html#declarations">Declarations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="laser-d.html#modules">Modules</a></li>
@@ -61,15 +63,14 @@
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#boolean-types">Boolean types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#integral-types">Integral types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#floating-point-types">Floating-point types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="laser-d.html#pointer-types">Pointer types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#enum-types">Enum types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#array-types">Array types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#slice-types">Slice Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#string-type">String type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="laser-d.html#pointer-types">Pointer types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#function-types">Function types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="laser-d.html#functionpointer-type">FunctionPointer type</a></li>
-<li class="toctree-l2"><a class="reference internal" href="laser-d.html#delegatetype">DelegateType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#struct-types">Struct types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="laser-d.html#delegatetype">DelegateType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#union-types">Union types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="laser-d.html#implicit-conversions">Implicit Conversions</a></li>
 </ul>
@@ -132,7 +133,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -149,7 +150,7 @@
       &copy;2020, Dibyendu Majumdar, D Language Foundation.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

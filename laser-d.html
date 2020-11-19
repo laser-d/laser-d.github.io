@@ -1,17 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction &#8212; Laser-D Language  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to Laser-D Programming Language’s documentation!" href="index.html" />
@@ -77,7 +78,7 @@ native libraries or executables.</p>
 <p>Each Laser-D source file defines a single module.</p>
 <p>Each laser-D module contains one or more declarations of entities.</p>
 <p>An entity is a named variable, function, structure or union type, enumeration type, template, mixin template or an external symbol.</p>
-<p>Entities in a Laser-D module can have linkage that specifies how these entities may be accessed from other Laser-D modules, or from programs in other
+<p>Entities in a Laser-D module can have linkage specification that defined how these entities may be accessed from other Laser-D modules, or from programs in other
 other languages such as C or C++.</p>
 </div>
 <div class="section" id="source-code-representation">
@@ -105,26 +106,33 @@ digit    = &quot;0&quot; … &quot;9&quot; .
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>The language has following keywords.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abstract</span>    <span class="n">alias</span>        <span class="n">align</span>          <span class="n">asm</span>          <span class="k">assert</span>      <span class="n">auto</span>
-<span class="n">body</span>        <span class="nb">bool</span>         <span class="k">break</span>          <span class="n">byte</span>         <span class="n">case</span>        <span class="n">cast</span>
-<span class="n">catch</span>       <span class="n">cdouble</span>      <span class="n">cent</span>           <span class="n">cfloat</span>       <span class="n">char</span>        <span class="k">class</span>
-<span class="nc">const</span>       <span class="k">continue</span>     <span class="n">creal</span>          <span class="n">dchar</span>        <span class="n">debug</span>       <span class="n">default</span>
-<span class="n">delegate</span>    <span class="n">delete</span>       <span class="n">deprecated</span>     <span class="n">do</span>           <span class="n">double</span>
-<span class="k">else</span>        <span class="n">enum</span>         <span class="n">export</span>         <span class="n">extern</span>       <span class="n">false</span>       <span class="n">final</span>
-<span class="k">finally</span>     <span class="nb">float</span>        <span class="k">for</span>            <span class="n">foreach</span>      <span class="n">foreach_reverse</span>    <span class="n">function</span>
-<span class="n">goto</span>        <span class="n">idouble</span>      <span class="k">if</span>             <span class="n">ifloat</span>       <span class="n">immutable</span>    <span class="kn">import</span>
-<span class="nn">in</span>          <span class="n">inout</span>        <span class="nb">int</span>            <span class="n">interface</span>    <span class="n">invariant</span>    <span class="n">ireal</span>
-<span class="ow">is</span>          <span class="n">lazy</span>         <span class="n">long</span>           <span class="n">macro</span>        <span class="n">mixin</span>        <span class="n">module</span>
-<span class="n">new</span>         <span class="n">nothrow</span>      <span class="n">null</span>           <span class="n">out</span>          <span class="n">override</span>     <span class="n">package</span>
-<span class="n">pragma</span>      <span class="n">private</span>      <span class="n">protected</span>      <span class="n">public</span>       <span class="n">pure</span>
-<span class="n">real</span>        <span class="n">ref</span>          <span class="k">return</span>         <span class="n">scope</span>        <span class="n">shared</span>       <span class="n">short</span>
-<span class="n">static</span>      <span class="n">struct</span>       <span class="nb">super</span>          <span class="n">switch</span>       <span class="n">synchronized</span>
-<span class="n">template</span>    <span class="n">this</span>         <span class="n">throw</span>          <span class="n">true</span>         <span class="k">try</span>          <span class="n">typeid</span>
-<span class="n">typeof</span>      <span class="n">ubyte</span>        <span class="n">ucent</span>          <span class="n">uint</span>         <span class="n">ulong</span>        <span class="n">union</span>
-<span class="n">unittest</span>    <span class="n">ushort</span>       <span class="n">version</span>        <span class="n">void</span>         <span class="n">wchar</span>        <span class="k">while</span>
-<span class="k">with</span>        <span class="n">__FILE__</span>     <span class="n">__FILE_FULL_PATH__</span>          <span class="n">__MODULE__</span>   <span class="n">__LINE__</span>
-<span class="n">__FUNCTION__</span>             <span class="n">__PRETTY_FUNCTION__</span>         <span class="n">__gshared</span>    <span class="n">__traits</span>
-<span class="n">__vector</span>    <span class="n">__parameters</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span>         <span class="n">align</span>        <span class="k">assert</span>        <span class="n">auto</span>         <span class="nb">bool</span>
+<span class="k">break</span>         <span class="n">byte</span>         <span class="n">case</span>          <span class="n">cast</span>         <span class="n">cdouble</span>
+<span class="n">cfloat</span>        <span class="n">char</span>         <span class="n">const</span>         <span class="k">continue</span>     <span class="n">creal</span>
+<span class="n">dchar</span>         <span class="n">debug</span>        <span class="n">default</span>       <span class="n">delegate</span>     <span class="n">do</span>
+<span class="n">double</span>        <span class="k">else</span>         <span class="n">enum</span>          <span class="n">export</span>       <span class="n">extern</span>
+<span class="n">false</span>         <span class="nb">float</span>        <span class="k">for</span>           <span class="n">foreach</span>      <span class="n">foreach_reverse</span>
+<span class="n">function</span>      <span class="n">goto</span>         <span class="n">idouble</span>       <span class="k">if</span>           <span class="n">ifloat</span>
+<span class="n">immutable</span>     <span class="kn">import</span>       <span class="nn">in</span>            <span class="n">inout</span>        <span class="nb">int</span>
+<span class="n">interface</span>     <span class="n">ireal</span>        <span class="ow">is</span>            <span class="n">long</span>         <span class="n">mixin</span>
+<span class="n">module</span>        <span class="n">null</span>         <span class="n">out</span>           <span class="n">pragma</span>       <span class="n">real</span>
+<span class="n">ref</span>           <span class="k">return</span>       <span class="n">scope</span>         <span class="n">shared</span>       <span class="n">short</span>
+<span class="n">static</span>        <span class="n">struct</span>       <span class="nb">super</span>         <span class="n">switch</span>       <span class="n">template</span>
+<span class="n">this</span>          <span class="n">true</span>         <span class="n">typeof</span>        <span class="n">ubyte</span>        <span class="n">uint</span>
+<span class="n">ulong</span>         <span class="n">union</span>        <span class="n">unittest</span>      <span class="n">ushort</span>       <span class="n">version</span>
+<span class="n">void</span>          <span class="n">wchar</span>        <span class="k">while</span>
+<span class="n">__FILE__</span>                   <span class="n">__FILE_FULL_PATH__</span>         <span class="n">__MODULE__</span>   <span class="n">__LINE__</span>
+<span class="n">__FUNCTION__</span>               <span class="n">__PRETTY_FUNCTION__</span>        <span class="n">__gshared</span>    <span class="n">__traits</span>
+<span class="n">__parameters</span>
+</pre></div>
+</div>
+<p>The following are reserved words for compatibility with D, however these are not keywords in Laser-D.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abstract</span>      <span class="n">asm</span>          <span class="n">body</span>           <span class="n">catch</span>       <span class="n">cent</span>         <span class="k">class</span>
+<span class="nc">debug</span>         <span class="n">delete</span>       <span class="n">deprecated</span>     <span class="n">final</span>       <span class="n">interface</span>    <span class="n">invariant</span>
+<span class="n">lazy</span>          <span class="n">mixin</span>        <span class="n">new</span>            <span class="n">nothrow</span>     <span class="n">override</span>     <span class="n">package</span>
+<span class="n">private</span>       <span class="n">protected</span>    <span class="n">public</span>         <span class="n">pragma</span>      <span class="n">pure</span>         <span class="nb">super</span>
+<span class="n">synchronized</span>  <span class="n">throw</span>        <span class="k">try</span>            <span class="n">typeid</span>      <span class="n">ucent</span>        <span class="k">with</span>
+<span class="n">__vector</span>
 </pre></div>
 </div>
 </div>
@@ -155,8 +163,8 @@ digit    = &quot;0&quot; … &quot;9&quot; .
 <h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>Comments serve as program documentation. There are two forms:</p>
 <ul class="simple">
-<li><p>Line comments start with the character sequence // and stop at the end of the line.</p></li>
-<li><p>General comments start with the character sequence /* and stop with the first subsequent character sequence */.</p></li>
+<li><p>Line comments start with the character sequence <code class="docutils literal notranslate"><span class="pre">//</span></code> and stop at the end of the line.</p></li>
+<li><p>General comments start with the character sequence <code class="docutils literal notranslate"><span class="pre">/*</span></code> and stop with the first subsequent character sequence <code class="docutils literal notranslate"><span class="pre">*/</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="string-literals">
@@ -187,13 +195,17 @@ digit    = &quot;0&quot; … &quot;9&quot; .
 called its scope. There are following kinds of scopes: global, module, struct or union type, template type, function, block.</p>
 <p>Different entities designated by the same identifier either have different scopes, or the identifiers must be in an overload set.</p>
 </div>
+<div class="section" id="declarations">
+<h2>Declarations<a class="headerlink" href="#declarations" title="Permalink to this headline">¶</a></h2>
+<p>All names must be declared prior to use, or imported from another module.</p>
+</div>
 </div>
 <div class="section" id="modules">
 <h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
 <p>Each Laser-D source file represents a distinct module. Each module has a name, optionally qualified with a package prefix.
 The module name, if not declared explicitly using the <code class="docutils literal notranslate"><span class="pre">module</span></code> declaration, is derived from the source file name.</p>
 <p>If present, the <code class="docutils literal notranslate"><span class="pre">module</span></code> declaration must be the first and only such declaration in the source file,
-and may be preceded only by comments and #line directives.</p>
+and may be preceded only by comments and <code class="docutils literal notranslate"><span class="pre">#line</span></code> directives.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ModuleDeclaration</span>             <span class="o">=</span> <span class="s2">&quot;module&quot;</span> <span class="n">ModuleFullyQualifiedName</span> <span class="s2">&quot;;&quot;</span> <span class="o">.</span>
 <span class="n">ModuleFullyQualifiedName</span>      <span class="o">=</span> <span class="p">{</span> <span class="n">PackageName</span> <span class="s2">&quot;.&quot;</span> <span class="p">}</span> <span class="n">ModuleName</span> <span class="o">.</span>
 <span class="n">ModuleName</span>                    <span class="o">=</span> <span class="n">identifier</span> <span class="o">.</span>
@@ -207,15 +219,18 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 <h1>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h1>
 <p>A type determines a set of values together with operations and methods specific to those values.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Type</span>         <span class="o">=</span> <span class="n">BasicType</span> <span class="o">|</span> <span class="n">DerivedType</span> <span class="o">|</span> <span class="n">TemplateType</span> <span class="o">.</span>
-<span class="n">BasicType</span>    <span class="o">=</span> <span class="s2">&quot;void&quot;</span> <span class="o">|</span> <span class="s2">&quot;bool&quot;</span> <span class="o">|</span> <span class="s2">&quot;byte&quot;</span> <span class="o">|</span> <span class="s2">&quot;ubyte&quot;</span> <span class="o">|</span> <span class="s2">&quot;short&quot;</span> <span class="o">|</span> <span class="s2">&quot;ushort&quot;</span> <span class="o">|</span> <span class="s2">&quot;int&quot;</span> <span class="o">|</span> <span class="s2">&quot;uint&quot;</span> <span class="o">|</span> <span class="s2">&quot;long&quot;</span> <span class="o">|</span> <span class="s2">&quot;ulong&quot;</span> <span class="o">|</span>
-               <span class="s2">&quot;cent&quot;</span> <span class="o">|</span> <span class="s2">&quot;ucent&quot;</span> <span class="o">|</span> <span class="s2">&quot;char&quot;</span> <span class="o">|</span> <span class="s2">&quot;wchar&quot;</span> <span class="o">|</span> <span class="s2">&quot;dchar&quot;</span> <span class="o">|</span> <span class="s2">&quot;float&quot;</span> <span class="o">|</span> <span class="s2">&quot;double&quot;</span> <span class="o">|</span> <span class="s2">&quot;real&quot;</span> <span class="o">|</span>
-               <span class="s2">&quot;ifloat&quot;</span> <span class="o">|</span> <span class="s2">&quot;idouble&quot;</span> <span class="o">|</span> <span class="s2">&quot;ireal&quot;</span> <span class="o">|</span> <span class="s2">&quot;cfloat&quot;</span> <span class="o">|</span> <span class="s2">&quot;cdouble&quot;</span> <span class="o">|</span> <span class="s2">&quot;creal&quot;</span> <span class="o">.</span>
-<span class="n">DerivedType</span>  <span class="o">=</span> <span class="n">ArrayType</span> <span class="o">|</span> <span class="n">StructType</span> <span class="o">|</span> <span class="n">PointerType</span> <span class="o">|</span> <span class="n">ReferenceType</span> <span class="o">|</span> <span class="n">FunctionType</span> <span class="o">|</span> <span class="n">UnionType</span> <span class="o">|</span> <span class="n">DelegateType</span> <span class="o">|</span> <span class="n">FunctionPointerType</span> <span class="o">.</span>
+<span class="n">BasicType</span>    <span class="o">=</span> <span class="s2">&quot;void&quot;</span> <span class="o">|</span> <span class="s2">&quot;bool&quot;</span> <span class="o">|</span> <span class="s2">&quot;byte&quot;</span> <span class="o">|</span> <span class="s2">&quot;ubyte&quot;</span> <span class="o">|</span> <span class="s2">&quot;short&quot;</span> <span class="o">|</span> <span class="s2">&quot;ushort&quot;</span> <span class="o">|</span>
+               <span class="s2">&quot;int&quot;</span> <span class="o">|</span> <span class="s2">&quot;uint&quot;</span> <span class="o">|</span> <span class="s2">&quot;long&quot;</span> <span class="o">|</span> <span class="s2">&quot;ulong&quot;</span> <span class="o">|</span> <span class="s2">&quot;char&quot;</span> <span class="o">|</span> <span class="s2">&quot;wchar&quot;</span> <span class="o">|</span>
+               <span class="s2">&quot;dchar&quot;</span> <span class="o">|</span> <span class="s2">&quot;float&quot;</span> <span class="o">|</span> <span class="s2">&quot;double&quot;</span> <span class="o">|</span> <span class="s2">&quot;real&quot;</span> <span class="o">|</span> <span class="s2">&quot;ifloat&quot;</span> <span class="o">|</span>
+               <span class="s2">&quot;idouble&quot;</span> <span class="o">|</span> <span class="s2">&quot;ireal&quot;</span> <span class="o">|</span> <span class="s2">&quot;cfloat&quot;</span> <span class="o">|</span> <span class="s2">&quot;cdouble&quot;</span> <span class="o">|</span> <span class="s2">&quot;creal&quot;</span> <span class="o">.</span>
+<span class="n">DerivedType</span>  <span class="o">=</span> <span class="n">ArrayType</span> <span class="o">|</span> <span class="n">StructType</span> <span class="o">|</span> <span class="n">PointerType</span> <span class="o">|</span> <span class="n">ReferenceType</span> <span class="o">|</span>
+               <span class="n">UnionType</span> <span class="o">.</span>
 </pre></div>
 </div>
 <div class="section" id="void-type">
 <h2>Void type<a class="headerlink" href="#void-type" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Keyword</span>     <span class="n">Default</span> <span class="n">Initializer</span>         <span class="n">Description</span>
+<span class="o">-------</span>     <span class="o">-------------------</span>         <span class="o">-----------</span>
 <span class="n">void</span>        <span class="o">-</span>                               <span class="n">no</span> <span class="nb">type</span>
 </pre></div>
 </div>
@@ -223,15 +238,16 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 <div class="section" id="boolean-types">
 <h2>Boolean types<a class="headerlink" href="#boolean-types" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Keyword</span>     <span class="n">Default</span> <span class="n">Initializer</span>         <span class="n">Description</span>
+<span class="o">-------</span>     <span class="o">-------------------</span>         <span class="o">-----------</span>
 <span class="nb">bool</span>        <span class="n">false</span>                       <span class="n">boolean</span> <span class="n">value</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">bool</span></code> type is a byte-size type that can only hold the value <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
-<p>The operators that can accept operands of type <code class="docutils literal notranslate"><span class="pre">bool</span></code> are: <code class="docutils literal notranslate"><span class="pre">&amp;</span> <span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">^</span></code>, <code class="docutils literal notranslate"><span class="pre">&amp;=</span></code>, <code class="docutils literal notranslate"><span class="pre">|=</span></code>, <code class="docutils literal notranslate"><span class="pre">^=</span></code>, <code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">||</span></code>, and <code class="docutils literal notranslate"><span class="pre">?:</span></code>.</p>
 </div>
 <div class="section" id="integral-types">
 <h2>Integral types<a class="headerlink" href="#integral-types" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Keyword</span>     <span class="n">Default</span> <span class="n">Initializer</span>         <span class="n">Description</span>
+<span class="o">-------</span>     <span class="o">-------------------</span>         <span class="o">-----------</span>
 <span class="n">byte</span>        <span class="mi">0</span>                           <span class="n">signed</span> <span class="mi">8</span> <span class="n">bits</span>
 <span class="n">ubyte</span>       <span class="mi">0</span><span class="n">u</span>                          <span class="n">unsigned</span> <span class="mi">8</span> <span class="n">bits</span>
 <span class="n">short</span>       <span class="mi">0</span>                           <span class="n">signed</span> <span class="mi">16</span> <span class="n">bits</span>
@@ -252,9 +268,10 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 <div class="section" id="floating-point-types">
 <h2>Floating-point types<a class="headerlink" href="#floating-point-types" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Keyword</span>     <span class="n">Default</span> <span class="n">Initializer</span>         <span class="n">Description</span>
+<span class="o">-------</span>     <span class="o">-------------------</span>         <span class="o">-----------</span>
 <span class="nb">float</span>       <span class="nb">float</span><span class="o">.</span><span class="n">nan</span>                   <span class="mi">32</span> <span class="n">bit</span> <span class="n">floating</span> <span class="n">point</span>
 <span class="n">double</span>      <span class="n">double</span><span class="o">.</span><span class="n">nan</span>                  <span class="mi">64</span> <span class="n">bit</span> <span class="n">floating</span> <span class="n">point</span>
-<span class="n">real</span>        <span class="n">real</span><span class="o">.</span><span class="n">nan</span>                    <span class="n">largest</span> <span class="n">FP</span> <span class="n">size</span> <span class="n">implemented</span> <span class="ow">in</span> <span class="n">hardwareImplementation</span> <span class="n">Note</span><span class="p">:</span> <span class="mi">80</span> <span class="n">bits</span> <span class="k">for</span> <span class="n">x86</span> <span class="n">CPUs</span> <span class="ow">or</span> <span class="n">double</span> <span class="n">size</span><span class="p">,</span> <span class="n">whichever</span> <span class="ow">is</span> <span class="n">larger</span>
+<span class="n">real</span>        <span class="n">real</span><span class="o">.</span><span class="n">nan</span>                    <span class="n">largest</span> <span class="n">FP</span> <span class="n">size</span> <span class="n">implemented</span> <span class="ow">in</span> <span class="n">hardware</span>
 
 <span class="n">ifloat</span>      <span class="nb">float</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="mf">1.0</span><span class="n">i</span>              <span class="n">imaginary</span> <span class="nb">float</span>
 <span class="n">idouble</span>     <span class="n">double</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="mf">1.0</span><span class="n">i</span>             <span class="n">imaginary</span> <span class="n">double</span>
@@ -264,15 +281,6 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 <span class="n">creal</span>       <span class="n">real</span><span class="o">.</span><span class="n">nan</span><span class="o">+</span><span class="n">real</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="mf">1.0</span><span class="n">i</span>      <span class="nb">complex</span> <span class="n">real</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pointer-types">
-<h2>Pointer types<a class="headerlink" href="#pointer-types" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PointerType</span> <span class="o">=</span> <span class="n">BaseType</span> <span class="s2">&quot;*&quot;</span> <span class="o">.</span>
-<span class="n">BaseType</span> <span class="o">=</span> <span class="n">Type</span> <span class="o">.</span>
-</pre></div>
-</div>
-<p>A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer.
-The value of an uninitialized pointer is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 </div>
 <div class="section" id="enum-types">
 <h2>Enum types<a class="headerlink" href="#enum-types" title="Permalink to this headline">¶</a></h2>
@@ -321,19 +329,26 @@ array and with other slices of the same array; by contrast, distinct arrays alwa
 <p>While a string literal has a <code class="docutils literal notranslate"><span class="pre">0</span></code> byte terminator, the string type does not.</p>
 <p>Laser-D’s built-in comparison operators compare strings as a sequence of Unicode code-points.</p>
 </div>
+<div class="section" id="pointer-types">
+<h2>Pointer types<a class="headerlink" href="#pointer-types" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PointerType</span> <span class="o">=</span> <span class="n">BaseType</span> <span class="s2">&quot;*&quot;</span> <span class="o">|</span> <span class="n">FunctionType</span> <span class="o">|</span> <span class="n">DelegateType</span> <span class="o">.</span>
+<span class="n">BaseType</span> <span class="o">=</span> <span class="n">Type</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer.
+The value of an uninitialized pointer is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
 <div class="section" id="function-types">
 <h2>Function types<a class="headerlink" href="#function-types" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FunctionType</span>         <span class="o">=</span> <span class="n">FunctionSignature</span> <span class="s2">&quot;;&quot;</span> <span class="o">.</span>
-<span class="n">FunctionSignature</span>    <span class="o">=</span> <span class="p">[</span> <span class="n">FunctionStorageClass</span> <span class="p">]</span> <span class="p">(</span> <span class="n">Result</span> <span class="o">|</span> <span class="n">auto</span> <span class="p">)</span> <span class="n">identifier</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FunctionType</span>         <span class="o">=</span> <span class="p">(</span> <span class="n">Result</span> <span class="o">|</span> <span class="n">auto</span> <span class="p">)</span> <span class="s2">&quot;function&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
 <span class="n">Result</span>               <span class="o">=</span> <span class="n">Type</span> <span class="o">.</span>
 <span class="n">Parameters</span>           <span class="o">=</span> <span class="p">[</span> <span class="n">ParameterList</span> <span class="p">]</span> <span class="o">.</span>
 <span class="n">ParameterList</span>        <span class="o">=</span> <span class="n">ParameterDecl</span> <span class="p">{</span> <span class="s2">&quot;,&quot;</span> <span class="n">ParameterDecl</span> <span class="p">}</span> <span class="o">.</span>
 <span class="n">ParameterDecl</span>        <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="n">ParameterAttribute</span> <span class="p">}</span> <span class="p">]</span> <span class="n">Type</span> <span class="n">identifier</span> <span class="o">.</span>
-<span class="n">ParameterAttribute</span>   <span class="o">=</span> <span class="s2">&quot;in&quot;</span> <span class="o">|</span> <span class="s2">&quot;out&quot;</span> <span class="o">|</span> <span class="s2">&quot;ref&quot;</span> <span class="o">|</span> <span class="s2">&quot;return&quot;</span> <span class="o">|</span> <span class="s2">&quot;scope&quot;</span> <span class="o">.</span>
-<span class="n">FunctionStorageClass</span> <span class="o">=</span> <span class="s2">&quot;ref&quot;</span> <span class="o">.</span>
+<span class="n">ParameterAttribute</span>   <span class="o">=</span> <span class="s2">&quot;in&quot;</span> <span class="o">|</span> <span class="s2">&quot;out&quot;</span> <span class="o">|</span> <span class="s2">&quot;ref&quot;</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>A function type is used to declare a name as a function, without defining the body of the function.</p>
+<p>A function type holds a pointer to a function.</p>
 <div class="section" id="parameter-attributes">
 <h3>Parameter Attributes<a class="headerlink" href="#parameter-attributes" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
@@ -343,28 +358,9 @@ array and with other slices of the same array; by contrast, distinct arrays alwa
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">out</span></code></dt><dd><p>An <code class="docutils literal notranslate"><span class="pre">out</span></code> parameter is passed by reference and initialized upon function entry with the default value of its type</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">scope</span></code></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">scope</span></code> parameter must not escape the function call (e.g. by being assigned to a global variable). Ignored for any parameter that is
-passed by value.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">return</span></code></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">return</span></code> parameter may be returned or copied to the first parameter, but otherwise does not escape from the function.</p>
-</dd>
 </dl>
 <p>The attributes <code class="docutils literal notranslate"><span class="pre">in</span></code>, <code class="docutils literal notranslate"><span class="pre">ref</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> are mutually exclusive.</p>
 </div>
-</div>
-<div class="section" id="functionpointer-type">
-<h2>FunctionPointer type<a class="headerlink" href="#functionpointer-type" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FunctionPointerType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;function&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
-</pre></div>
-</div>
-<p>A function pointer type holds a pointer to a function.</p>
-</div>
-<div class="section" id="delegatetype">
-<h2>DelegateType<a class="headerlink" href="#delegatetype" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DelegateType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;delegate&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
-</pre></div>
-</div>
-<p>The delegate type holds a pair of pointers: a context and a pointer to function.</p>
 </div>
 <div class="section" id="struct-types">
 <h2>Struct types<a class="headerlink" href="#struct-types" title="Permalink to this headline">¶</a></h2>
@@ -375,7 +371,7 @@ variable, function, or other declaration of that name in an enclosing scope.</p>
 <span class="n">DataMember</span>    <span class="o">=</span> <span class="n">Type</span> <span class="n">identifier</span> <span class="p">[</span> <span class="s2">&quot;=&quot;</span> <span class="n">Initializer</span> <span class="p">]</span> <span class="s2">&quot;;&quot;</span> <span class="o">.</span>
 <span class="n">Constructor</span>   <span class="o">=</span> <span class="s2">&quot;this&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="n">FunctionBody</span> <span class="o">.</span>
 <span class="n">Destructor</span>    <span class="o">=</span> <span class="s2">&quot;~&quot;</span> <span class="s2">&quot;this&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="s2">&quot;)&quot;</span> <span class="n">FunctionBody</span> <span class="o">.</span>
-<span class="n">Method</span>        <span class="o">=</span> <span class="n">FunctionSignature</span> <span class="n">FunctionBody</span> <span class="o">.</span>
+<span class="n">Method</span>        <span class="o">=</span> <span class="p">(</span> <span class="n">Result</span> <span class="o">|</span> <span class="n">auto</span> <span class="p">)</span> <span class="n">identifier</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="n">FunctionBody</span> <span class="o">.</span>
 <span class="n">StaticMethod</span>  <span class="o">=</span> <span class="s2">&quot;static&quot;</span> <span class="n">Method</span> <span class="o">.</span>
 </pre></div>
 </div>
@@ -413,6 +409,13 @@ A struct constructor can be invoked by the name of the struct followed by its pa
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="delegatetype">
+<h2>DelegateType<a class="headerlink" href="#delegatetype" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DelegateType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;delegate&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method.</p>
 </div>
 <div class="section" id="union-types">
 <h2>Union types<a class="headerlink" href="#union-types" title="Permalink to this headline">¶</a></h2>
@@ -462,6 +465,7 @@ or references.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#names">Names</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#declarations">Declarations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#modules">Modules</a></li>
@@ -470,15 +474,14 @@ or references.</p>
 <li class="toctree-l2"><a class="reference internal" href="#boolean-types">Boolean types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#integral-types">Integral types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#floating-point-types">Floating-point types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pointer-types">Pointer types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enum-types">Enum types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#array-types">Array types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slice-types">Slice Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#string-type">String type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pointer-types">Pointer types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#function-types">Function types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#functionpointer-type">FunctionPointer type</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#delegatetype">DelegateType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#struct-types">Struct types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delegatetype">DelegateType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#union-types">Union types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#implicit-conversions">Implicit Conversions</a></li>
 </ul>
@@ -502,7 +505,7 @@ or references.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -519,7 +522,7 @@ or references.</p>
       &copy;2020, Dibyendu Majumdar, D Language Foundation.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
