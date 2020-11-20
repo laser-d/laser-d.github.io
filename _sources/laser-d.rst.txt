@@ -18,7 +18,9 @@ Here is a hello world program in Laser-D.
 
 Notation
 ========
-The syntax is specified using Extended Backus-Naur Form (EBNF)::
+The syntax is specified using Extended Backus-Naur Form (EBNF). This notation is borrowed from the Go Language specification.
+
+::
 
     Production  = production_name "=" [ Expression ] "." .
     Expression  = Alternative { "|" Alternative } .
@@ -50,9 +52,9 @@ native libraries or executables.
 
 Each Laser-D source file defines a single module. 
 
-Each laser-D module contains one or more declarations of entities. 
+Each laser-D module contains one or more declarations of entities.
 
-An entity is a named variable, function, structure or union type, enumeration type, template, mixin template or an external symbol.
+An entity is a named variable, function, type, template, or mixin template. 
 
 Entities in a Laser-D module can have linkage specification that defined how these entities may be accessed from other Laser-D modules, or from programs in other 
 other languages such as C or C++.
@@ -103,10 +105,10 @@ The language has following keywords.
     interface     ireal        is            long         mixin        
     module        null         out           pragma       real
     ref           return       scope         shared       short
-    static        struct       super         switch       template    
-    this          true         typeof        ubyte        uint         
-    ulong         union        unittest      ushort       version        
-    void          wchar        while
+    static        struct       switch        template     this          
+    true          typeof       ubyte         uint         ulong         
+    union         unittest     ushort        version      void          
+    wchar         while
     __FILE__                   __FILE_FULL_PATH__         __MODULE__   __LINE__
     __FUNCTION__               __PRETTY_FUNCTION__        __gshared    __traits     
     __parameters
@@ -115,11 +117,11 @@ The following are reserved words for compatibility with D, however these are not
 
 ::
 
-    abstract      asm          body           catch       cent         class
-    debug         delete       deprecated     final       interface    invariant
-    lazy          mixin        new            nothrow     override     package
-    private       protected    public         pragma      pure         super  
-    synchronized  throw        try            typeid      ucent        with
+    abstract      asm          body          catch        cent         class
+    delete        deprecated   final         interface    invariant    lazy          
+    new           nothrow      override      package      private      protected    
+    public        pure         super         synchronized throw        try            
+    typeid        ucent        with
     __vector
 
 
@@ -148,7 +150,7 @@ Identifiers
     identifier = nondigit { nondigit | digit } .
 
 
-An identifier is a sequence chracters with a ``nondigit`` character followed by ``nondigit`` or ``digit`` characters.  
+An identifier is a sequence characters starting with a ``nondigit`` character followed by ``nondigit`` or ``digit`` characters.  
 
 Lowercase and uppercase letters are distinct. There is no specific limit on the maximum length of an identifier.
 
@@ -179,20 +181,20 @@ In a Laser-D program, identifiers can be used to denote:
 * mixin templates
 * import bindings
 * attributes
-* external symbols
+* external entities
 
 The same identifier can denote different entities at different points in the program.
 
 Scope
 -----
 An identifier is visible (i.e., can be used) only within a region of program text 
-called its scope. There are following kinds of scopes: global, module, struct or union type, template type, function, block. 
+called its scope. There are following kinds of scopes: global, module, struct or union type, template, function, block. 
 
 Different entities designated by the same identifier either have different scopes, or the identifiers must be in an overload set.
 
 Declarations
 ------------
-All names must be declared prior to use, or imported from another module.
+For a name to be available, its declaration must be available in the module in an appropriate scope, or via an import from another module
 
 Modules
 =======
@@ -220,16 +222,13 @@ A type determines a set of values together with operations and methods specific 
 
 ::
 
-    Type         = BasicType | DerivedType | TemplateType .
-    BasicType    = "void" | "bool" | "byte" | "ubyte" | "short" | "ushort" | 
-                   "int" | "uint" | "long" | "ulong" | "char" | "wchar" | 
-                   "dchar" | "float" | "double" | "real" | "ifloat" | 
-                   "idouble" | "ireal" | "cfloat" | "cdouble" | "creal" .
-    DerivedType  = ArrayType | StructType | PointerType | ReferenceType | 
-                   UnionType .
+    Type         = BasicType | DerivedType .
+    BasicType    = VoidType | BooleanType | IntegralType | FloatingPointType .
+    DerivedType  = ArrayType | SliceType | EnumerationType | StructType | UnionType |
+                   PointerType | ReferenceType .
 
-Void type
----------
+VoidType
+--------
 
 ::
 
@@ -237,8 +236,8 @@ Void type
     -------     -------------------         -----------
     void        -	                        no type
 
-Boolean types
--------------
+BooleanType
+-----------
 
 ::
 
@@ -249,8 +248,8 @@ Boolean types
 The ``bool`` type is a byte-size type that can only hold the value ``true`` or ``false``.
 
 
-Integral types
---------------
+IntegralType
+------------
 
 ::
 
@@ -271,8 +270,8 @@ Integral types
     wchar       'uFFFF'                     unsigned 16 bit (UTF-16 code unit)
     dchar       'U0000FFFF'                 unsigned 32 bit (UTF-32 code unit)
 
-Floating-point types
---------------------
+FloatingPointType
+-----------------
 
 ::
 
@@ -290,12 +289,12 @@ Floating-point types
     creal       real.nan+real.nan*1.0i      complex real
 
 
-Enum types
-----------
+EnumerationType
+---------------
 
 
-Array types
------------
+ArrayType
+---------
 
 ::
 
@@ -312,11 +311,13 @@ The length of array ``a`` can be discovered using the built-in property ``length
 
 ::
 
-    int[10] a;   // a is an array of 10 ints, a.length == 10
+    int[10] a;    // a is an array of 10 ints, a.length == 10
+    int[3] x;     // x is an array of 3 ints
+    int[3][5] x;  // x is an array of 5 arrays of 3 ints
 
 
-Slice Types
------------
+SliceType
+---------
 
 ::
 
@@ -347,7 +348,7 @@ String type
     wstring         immutable array of wchar (UTF-16)
     dstring         immutable array of dchar (UTF-32)
 
-A string type is simply an alias for an immutable array of ``char``, ``wchar`` or ``dchar``. 
+A string type is an alias for an immutable array of ``char``, ``wchar`` or ``dchar``. 
 
 While a string literal has a ``0`` byte terminator, the string type does not.
 
@@ -358,24 +359,33 @@ Pointer types
 
 ::
 
-    PointerType = BaseType "*" | FunctionType | DelegateType .
+    PointerType = BaseType "*" | FunctionPointerType | DelegateType .
     BaseType = Type .
 
 A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer. 
 The value of an uninitialized pointer is ``null``. 
 
-Function types
---------------
+FunctionPointerType
+-------------------
 ::
 
-    FunctionType         = ( Result | auto ) "function" "(" Parameters ")" .
+    FunctionPointerType  = ( Result | auto ) "function" "(" Parameters ")" .
     Result               = Type .
     Parameters           = [ ParameterList ] .
     ParameterList        = ParameterDecl { "," ParameterDecl } .
-    ParameterDecl        = [ { ParameterAttribute } ] Type identifier .
+    ParameterDecl        = [ { ParameterAttribute } ] Type [ identifier ] .
     ParameterAttribute   = "in" | "out" | "ref" .
 
-A function type holds a pointer to a function. 
+Example::
+
+    int function(char) x; // x is a pointer to
+                     // a function taking a char argument
+                     // and returning an int
+    int function(char)[] x; // x is an array of
+                     // pointers to functions
+                     // taking a char argument
+                     // and returning an int
+
 
 Parameter Attributes
 ++++++++++++++++++++
@@ -390,21 +400,21 @@ Parameter Attributes
 The attributes ``in``, ``ref`` and ``out`` are mutually exclusive.
 
 
-Struct types
-------------
+StructType
+----------
 A struct declaration introduces the struct name as a type into the scope where it is declared and hides any struct, 
 variable, function, or other declaration of that name in an enclosing scope.
 
-
 ::
 
-    StructType    = "struct" identifier [ "{" { MemberDecl } "}" ] .
-    MemberDecl    = DataMember | Constructor | Destructor | Method | StaticMethod .
-    DataMember    = Type identifier [ "=" Initializer ] ";" .
-    Constructor   = "this" "(" Parameters ")" FunctionBody .
-    Destructor    = "~" "this" "(" ")" FunctionBody .
-    Method        = ( Result | auto ) identifier "(" Parameters ")" FunctionBody .
-    StaticMethod  = "static" Method .
+    StructDeclaration = "struct" StructType [ "{" { MemberDecl } "}" ] .
+    StructType        = identifier .
+    MemberDecl        = DataMember | Constructor | Destructor | Method | StaticMethod .
+    DataMember        = Type identifier [ "=" Initializer ] ";" .
+    Constructor       = "this" "(" Parameters ")" FunctionBody .
+    Destructor        = "~" "this" "(" ")" FunctionBody .
+    Method            = ( Result | auto ) identifier "(" Parameters ")" FunctionBody .
+    StaticMethod      = "static" Method .
 
 The data members of a struct are allocated so that later members have higher addresses within a struct object. 
 Implementation alignment requirements might cause two adjacent members not to be allocated immediately after each other.
@@ -457,8 +467,39 @@ Union types
 -----------
 
 
+Templates
+=========
 
+::
 
+    Template                    = TemplateDeclaration | StructTemplateDeclaration | UnionTemplateDeclaration | FunctionTemplateDeclaration .
+    TemplateDeclaration         = "template" TemplateName TemplateParameters [ Constraint ] TemplateBody .
+    TemplateParameters          = "(" TemplateParameter { "," TemplateParameter } [ "," TemplateSequenceParameter ] ")" .
+    TemplateParameter           = TemplateTypeParameter | TemplateAliasParameter | TemplateValueParameter | TemplateThisParameter .
+    TemplateTypeParameter       = identifier TemplateTypeSpecialization TemplateTypeDefault .
+    TemplateTypeSpecialization  = [ ":" Type ] .
+    TemplateTypeDefault         = [ "=" Type ]
+    TemplateSequenceParameter   = identifier "..." .
+    StructTemplateDeclaration   = "struct" TemplateName TemplateParameters [ Constraint ] "{" { MemberDecl } "}" .
+    FunctionTemplateDeclaration = ( Result | auto ) TemplateName TemplateParameters [ Constraint ] "(" Parameters ")" FunctionBody .
+    TemplateName                = identifier .
+    TemplateBody                = "{" MemberDecl "}" .
+
+Templates are a compile-time code generation mechanism.
+
+A templates takes template parameters that can be values, names of types or entities, or sequences. 
+
+A template introduces a scope, and the template body can contain structs and unions, types, enums, variables, functions, and other templates.
+
+Value parameters must be of an integral type, floating point type, or string type and specializations for them must resolve to an integral constant, 
+floating point constant, null, or a string literal.
+
+Templates are instantiated (i.e. generated) in the scope where the template is declared and any names used inside the template, unless declared in the template
+scope, shall be looked up in the enclosing scopes of the module where the template is declared.
+
+The struct template declaration is equivalent to a template declaration containing a single struct declaration where the struct name and the template name are the same.
+
+The function template declaration is equivalent to a template declaration containing a single function where the function name and the template name are the same.
 
 
 Implicit Conversions 
