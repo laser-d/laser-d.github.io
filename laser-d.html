@@ -169,6 +169,7 @@ digit    = &quot;0&quot; … &quot;9&quot; .
 <div class="section" id="string-literals">
 <h2>String Literals<a class="headerlink" href="#string-literals" title="Permalink to this headline">¶</a></h2>
 <p>A string literal is either a double quoted string, a wysiwyg quoted string, a delimited string, a token string, or a hex string.</p>
+<p>todo</p>
 </div>
 </div>
 <div class="section" id="names">
@@ -280,6 +281,7 @@ modules can be disambiguated using the fully qualified names of the entities.</p
 </div>
 <div class="section" id="enumerationtype">
 <h2>EnumerationType<a class="headerlink" href="#enumerationtype" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
 </div>
 <div class="section" id="arraytype">
 <h2>ArrayType<a class="headerlink" href="#arraytype" title="Permalink to this headline">¶</a></h2>
@@ -373,6 +375,36 @@ The value of an uninitialized pointer is <code class="docutils literal notransla
 <h2>StructType<a class="headerlink" href="#structtype" title="Permalink to this headline">¶</a></h2>
 <p>A struct declaration introduces the struct name as a type into the scope where it is declared and hides any struct,
 variable, function, or other declaration of that name in an enclosing scope.</p>
+</div>
+<div class="section" id="uniontype">
+<h2>UnionType<a class="headerlink" href="#uniontype" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="delegatetype">
+<h2>DelegateType<a class="headerlink" href="#delegatetype" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DelegateType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;delegate&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>Declarations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>todo</p>
+<div class="section" id="constant-declarations">
+<h2>Constant declarations<a class="headerlink" href="#constant-declarations" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="variable-declarations">
+<h2>Variable declarations<a class="headerlink" href="#variable-declarations" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="function-declarations">
+<h2>Function declarations<a class="headerlink" href="#function-declarations" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="struct-and-union-declarations">
+<h2>Struct and union declarations<a class="headerlink" href="#struct-and-union-declarations" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StructDeclaration</span> <span class="o">=</span> <span class="s2">&quot;struct&quot;</span> <span class="n">StructType</span> <span class="p">[</span> <span class="s2">&quot;{&quot;</span> <span class="p">{</span> <span class="n">MemberDecl</span> <span class="p">}</span> <span class="s2">&quot;}&quot;</span> <span class="p">]</span> <span class="o">.</span>
 <span class="n">StructType</span>        <span class="o">=</span> <span class="n">identifier</span> <span class="o">.</span>
 <span class="n">MemberDecl</span>        <span class="o">=</span> <span class="n">DataMember</span> <span class="o">|</span> <span class="n">Constructor</span> <span class="o">|</span> <span class="n">Destructor</span> <span class="o">|</span> <span class="n">Method</span> <span class="o">|</span> <span class="n">StaticMethod</span> <span class="o">.</span>
@@ -418,19 +450,8 @@ A struct constructor can be invoked by the name of the struct followed by its pa
 </div>
 </div>
 </div>
-<div class="section" id="delegatetype">
-<h2>DelegateType<a class="headerlink" href="#delegatetype" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DelegateType</span>  <span class="o">=</span> <span class="n">Result</span> <span class="s2">&quot;delegate&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="n">Parameters</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
-</pre></div>
-</div>
-<p>The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method.</p>
-</div>
-<div class="section" id="union-types">
-<h2>Union types<a class="headerlink" href="#union-types" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
-<div class="section" id="templates">
-<h1>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="template-declarations">
+<h2>Template declarations<a class="headerlink" href="#template-declarations" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Template</span>                    <span class="o">=</span> <span class="n">TemplateDeclaration</span> <span class="o">|</span> <span class="n">StructTemplateDeclaration</span> <span class="o">|</span> <span class="n">UnionTemplateDeclaration</span> <span class="o">|</span> <span class="n">FunctionTemplateDeclaration</span> <span class="o">.</span>
 <span class="n">TemplateDeclaration</span>         <span class="o">=</span> <span class="s2">&quot;template&quot;</span> <span class="n">TemplateName</span> <span class="n">TemplateParameters</span> <span class="p">[</span> <span class="n">Constraint</span> <span class="p">]</span> <span class="n">TemplateBody</span> <span class="o">.</span>
 <span class="n">TemplateParameters</span>          <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="n">TemplateParameter</span> <span class="p">{</span> <span class="s2">&quot;,&quot;</span> <span class="n">TemplateParameter</span> <span class="p">}</span> <span class="p">[</span> <span class="s2">&quot;,&quot;</span> <span class="n">TemplateSequenceParameter</span> <span class="p">]</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
@@ -454,13 +475,147 @@ floating point constant, null, or a string literal.</p>
 scope, shall be looked up in the enclosing scopes of the module where the template is declared.</p>
 <p>The struct template declaration is equivalent to a template declaration containing a single struct declaration where the struct name and the template name are the same.</p>
 <p>The function template declaration is equivalent to a template declaration containing a single function where the function name and the template name are the same.</p>
-<div class="section" id="implicit-conversions">
-<h2>Implicit Conversions<a class="headerlink" href="#implicit-conversions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template-instantiations">
+<h3>Template instantiations<a class="headerlink" href="#template-instantiations" title="Permalink to this headline">¶</a></h3>
+<p>todo</p>
+</div>
+</div>
+</div>
+<div class="section" id="expressions">
+<h1>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h1>
+<p>todo</p>
+<div class="section" id="literals">
+<h2>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="primary-expressions">
+<h2>Primary expressions<a class="headerlink" href="#primary-expressions" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="index-expressions">
+<h2>Index expressions<a class="headerlink" href="#index-expressions" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="slice-expressions">
+<h2>Slice expressions<a class="headerlink" href="#slice-expressions" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="arithmetic-operators">
+<h2>Arithmetic operators<a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="comparison-operators">
+<h2>Comparison operators<a class="headerlink" href="#comparison-operators" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="logical-operators">
+<h2>Logical operators<a class="headerlink" href="#logical-operators" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="address-operators">
+<h2>Address operators<a class="headerlink" href="#address-operators" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="unary-expressions">
+<h2>Unary expressions<a class="headerlink" href="#unary-expressions" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="conversions">
+<h2>Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value can be implicitly converted to any integral type, with <code class="docutils literal notranslate"><span class="pre">false</span></code> becoming <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">true</span></code> becoming <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 <p>The numeric literals <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> can be implicitly converted to the bool values <code class="docutils literal notranslate"><span class="pre">false</span></code> and <code class="docutils literal notranslate"><span class="pre">true</span></code>, respectively.
 Casting an expression to <code class="docutils literal notranslate"><span class="pre">bool</span></code> means testing for <code class="docutils literal notranslate"><span class="pre">==0</span></code> or <code class="docutils literal notranslate"><span class="pre">!=0</span></code> for arithmetic types, and <code class="docutils literal notranslate"><span class="pre">==null</span></code> or <code class="docutils literal notranslate"><span class="pre">!=null</span></code> for pointers
 or references.</p>
+<p>todo</p>
 </div>
+</div>
+<div class="section" id="statements">
+<h1>Statements<a class="headerlink" href="#statements" title="Permalink to this headline">¶</a></h1>
+<p>todo</p>
+<div class="section" id="scope-statement">
+<h2>Scope statement<a class="headerlink" href="#scope-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="scope-block-statement">
+<h2>Scope block statement<a class="headerlink" href="#scope-block-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="labeled-statement">
+<h2>Labeled statement<a class="headerlink" href="#labeled-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="block-statement">
+<h2>Block statement<a class="headerlink" href="#block-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="expression-statement">
+<h2>Expression statement<a class="headerlink" href="#expression-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="declaration-statement">
+<h2>Declaration statement<a class="headerlink" href="#declaration-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="if-statement">
+<h2>If statement<a class="headerlink" href="#if-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="while-statement">
+<h2>While statement<a class="headerlink" href="#while-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="do-statement">
+<h2>Do statement<a class="headerlink" href="#do-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="for-statement">
+<h2>For statement<a class="headerlink" href="#for-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="foreach-statement">
+<h2>Foreach statement<a class="headerlink" href="#foreach-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="switch-statement">
+<h2>Switch statement<a class="headerlink" href="#switch-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="continue-statement">
+<h2>Continue statement<a class="headerlink" href="#continue-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="break-statement">
+<h2>Break statement<a class="headerlink" href="#break-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="return-statement">
+<h2>Return statement<a class="headerlink" href="#return-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="goto-statement">
+<h2>Goto statement<a class="headerlink" href="#goto-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="scope-guard-statement">
+<h2>Scope Guard statement<a class="headerlink" href="#scope-guard-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="pragma-statement">
+<h2>Pragma statement<a class="headerlink" href="#pragma-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="mixin-statement">
+<h2>Mixin statement<a class="headerlink" href="#mixin-statement" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+</div>
+<div class="section" id="conditional-compilation">
+<h1>Conditional Compilation<a class="headerlink" href="#conditional-compilation" title="Permalink to this headline">¶</a></h1>
+<p>todo</p>
+</div>
+<div class="section" id="compile-time-introspection">
+<h1>Compile Time Introspection<a class="headerlink" href="#compile-time-introspection" title="Permalink to this headline">¶</a></h1>
+<p>todo</p>
 </div>
 
 
@@ -515,14 +670,55 @@ or references.</p>
 <li class="toctree-l2"><a class="reference internal" href="#pointer-types">Pointer types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#functionpointertype">FunctionPointerType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#structtype">StructType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uniontype">UnionType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#delegatetype">DelegateType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#union-types">Union types</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#templates">Templates</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#implicit-conversions">Implicit Conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id1">Declarations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constant-declarations">Constant declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variable-declarations">Variable declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-declarations">Function declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#struct-and-union-declarations">Struct and union declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#template-declarations">Template declarations</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#expressions">Expressions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#literals">Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#primary-expressions">Primary expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#index-expressions">Index expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slice-expressions">Slice expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arithmetic-operators">Arithmetic operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparison-operators">Comparison operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logical-operators">Logical operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#address-operators">Address operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unary-expressions">Unary expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conversions">Conversions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#statements">Statements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scope-statement">Scope statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scope-block-statement">Scope block statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#labeled-statement">Labeled statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#block-statement">Block statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expression-statement">Expression statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#declaration-statement">Declaration statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#if-statement">If statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#while-statement">While statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#do-statement">Do statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-statement">For statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#foreach-statement">Foreach statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#switch-statement">Switch statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continue-statement">Continue statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#break-statement">Break statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#return-statement">Return statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#goto-statement">Goto statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scope-guard-statement">Scope Guard statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pragma-statement">Pragma statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mixin-statement">Mixin statement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#conditional-compilation">Conditional Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#compile-time-introspection">Compile Time Introspection</a></li>
 </ul>
 
 <div class="relations">

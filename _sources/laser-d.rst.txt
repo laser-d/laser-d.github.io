@@ -167,6 +167,8 @@ String Literals
 
 A string literal is either a double quoted string, a wysiwyg quoted string, a delimited string, a token string, or a hex string.
 
+todo
+
 Names
 =====
 In a Laser-D program, identifiers can be used to denote:
@@ -291,7 +293,7 @@ FloatingPointType
 
 EnumerationType
 ---------------
-
+todo
 
 ArrayType
 ---------
@@ -405,6 +407,39 @@ StructType
 A struct declaration introduces the struct name as a type into the scope where it is declared and hides any struct, 
 variable, function, or other declaration of that name in an enclosing scope.
 
+
+UnionType
+---------
+todo
+
+DelegateType
+------------
+
+::
+
+    DelegateType  = Result "delegate" "(" Parameters ")" .
+
+The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method. 
+    
+
+Declarations
+============
+todo
+
+Constant declarations
+---------------------
+todo
+
+Variable declarations
+---------------------
+todo
+
+Function declarations
+---------------------
+todo
+
+Struct and union declarations
+-----------------------------
 ::
 
     StructDeclaration = "struct" StructType [ "{" { MemberDecl } "}" ] .
@@ -418,6 +453,7 @@ variable, function, or other declaration of that name in an enclosing scope.
 
 The data members of a struct are allocated so that later members have higher addresses within a struct object. 
 Implementation alignment requirements might cause two adjacent members not to be allocated immediately after each other.
+
 
 Initialization
 ++++++++++++++
@@ -453,22 +489,9 @@ A struct constructor can be invoked by the name of the struct followed by its pa
         S c = S(1); // error, matching this(int) not found
     }
 
-DelegateType
-------------
 
-::
-
-    DelegateType  = Result "delegate" "(" Parameters ")" .
-
-The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method. 
-
-    
-Union types
------------
-
-
-Templates
-=========
+Template declarations
+---------------------
 
 ::
 
@@ -501,13 +524,149 @@ The struct template declaration is equivalent to a template declaration containi
 
 The function template declaration is equivalent to a template declaration containing a single function where the function name and the template name are the same.
 
+Template instantiations
++++++++++++++++++++++++
+todo
 
-Implicit Conversions 
+
+
+Expressions
+===========
+todo
+
+Literals
+--------
+todo
+
+Primary expressions
+-------------------
+todo
+
+Index expressions
+-----------------
+todo
+
+Slice expressions
+-----------------
+todo
+
+Arithmetic operators
 --------------------
+todo
+
+Comparison operators
+--------------------
+todo
+
+Logical operators
+-----------------
+todo
+
+Address operators
+-----------------
+todo
+
+Unary expressions
+-----------------
+todo
+
+Conversions 
+-----------
 
 A ``bool`` value can be implicitly converted to any integral type, with ``false`` becoming ``0`` and ``true`` becoming ``1``.
 
 The numeric literals ``0`` and ``1`` can be implicitly converted to the bool values ``false`` and ``true``, respectively. 
 Casting an expression to ``bool`` means testing for ``==0`` or ``!=0`` for arithmetic types, and ``==null`` or ``!=null`` for pointers 
 or references.
+
+todo
+
+Statements
+==========
+todo
+
+Scope statement
+---------------
+todo
+
+Scope block statement
+---------------------
+todo
+
+Labeled statement
+-----------------
+todo
+
+Block statement
+---------------
+todo
+
+Expression statement
+--------------------
+todo
+
+Declaration statement
+---------------------
+todo
+
+If statement
+------------
+todo
+
+While statement
+---------------
+todo
+
+Do statement
+------------
+todo
+
+For statement
+-------------
+todo
+
+Foreach statement
+-----------------
+todo
+
+Switch statement
+----------------
+todo
+
+Continue statement
+------------------
+todo
+
+Break statement
+---------------
+todo
+
+Return statement
+----------------
+todo
+
+Goto statement
+--------------
+todo
+
+Scope Guard statement
+---------------------
+todo
+
+Pragma statement
+----------------
+todo
+
+Mixin statement
+---------------
+todo
+
+Conditional Compilation
+=======================
+todo
+
+Compile Time Introspection
+==========================
+todo
+
 
