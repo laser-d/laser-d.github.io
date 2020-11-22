@@ -94,34 +94,34 @@ The language has following keywords.
 
 ::
 
-    alias         align        assert        auto         bool         
-    break         byte         case          cast         cdouble      
-    cfloat        char         const         continue     creal          
-    dchar         debug        default       delegate     do           
-    double        else         enum          export       extern       
-    false         float        for           foreach      foreach_reverse    
-    function      goto         idouble       if           ifloat 
-    immutable     import       in            inout        int            
-    interface     ireal        is            long         mixin        
-    module        null         out           pragma       real
-    ref           return       scope         shared       short
-    static        struct       switch        template     this          
-    true          typeof       ubyte         uint         ulong         
-    union         unittest     ushort        version      void          
-    wchar         while
-    __FILE__                   __FILE_FULL_PATH__         __MODULE__   __LINE__
-    __FUNCTION__               __PRETTY_FUNCTION__        __gshared    __traits     
+    abstract     alias        align        assert       auto         
+    bool         break        byte         case         cast         
+    cdouble      cfloat       char         class        const        
+    continue     creal        dchar        debug        default      
+    delegate     do           double       else         enum          
+    export       extern       false        float        for           
+    foreach      foreach_reverse           function     goto         
+    idouble      if           ifloat       immutable    import       
+    in           inout        int          ireal        is            
+    long         mixin        module       null         out           
+    override     pragma       real         ref          return       
+    scope        shared       short        static       struct       
+    switch       template     this         true         typeof       
+    ubyte        uint         ulong        union        unittest     
+    ushort       version      void         wchar        while
+    __FILE__                   __FILE_FULL_PATH__       __MODULE__   __LINE__
+    __FUNCTION__               __PRETTY_FUNCTION__      __gshared    __traits     
     __parameters
 
 The following are reserved words for compatibility with D, however these are not keywords in Laser-D.
 
 ::
 
-    abstract      asm          body          catch        cent         class
-    delete        deprecated   final         interface    invariant    lazy          
-    new           nothrow      override      package      private      protected    
-    public        pure         super         synchronized throw        try            
-    typeid        ucent        with
+    asm          body         catch        cent         delete        
+    deprecated   final        interface    invariant    lazy          
+    new          nothrow      package      private      protected    
+    public       pure         super        synchronized throw        
+    try          typeid       ucent        with
     __vector
 
 
@@ -227,7 +227,7 @@ A type determines a set of values together with operations and methods specific 
     Type         = BasicType | DerivedType .
     BasicType    = VoidType | BooleanType | IntegralType | FloatingPointType .
     DerivedType  = ArrayType | SliceType | EnumerationType | StructType | UnionType |
-                   PointerType | ReferenceType .
+                   PointerType | ReferenceType | C++Type .
 
 VoidType
 --------
@@ -245,7 +245,7 @@ BooleanType
 
     Keyword     Default Initializer         Description
     -------     -------------------         -----------
-    bool        false	                    boolean value
+    bool        false                       boolean value
 
 The ``bool`` type is a byte-size type that can only hold the value ``true`` or ``false``.
 
@@ -421,6 +421,10 @@ DelegateType
 
 The delegate type holds a pointer to a struct method. It enacpsulates both a reference to the struct object and the method. 
     
+C++Type
+-------
+
+The declaration of a C++ class introduces the class name as a type into the scope where it is declared. 
 
 Declarations
 ============
@@ -487,6 +491,24 @@ A struct constructor can be invoked by the name of the struct followed by its pa
         S a = S(4, 5); // calls S.this(4, 5):  a.x = 4, a.y = 5, a.z = 6
         S b = S();  // default initialized:    b.x = 0, b.y = 4, b.z = 6
         S c = S(1); // error, matching this(int) not found
+    }
+
+
+C++ Class Declaration
+---------------------
+
+A C++ abstract class or class type can be declared using following syntax::
+
+    C++Type             = "extern" "(" "C++" ")" [ "abstract" ] "class" C++Type [ "{" { MemberDecl } "}" ] .
+
+Variables of C++ class type are pointers rather than value objects.
+
+::
+
+    extern (C++) class A {int a;}
+    extern (C) void main() {
+        A a;
+        assert(a); // will fail as a is null
     }
 
 
