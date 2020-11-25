@@ -1,17 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction &#8212; Laser-D Language  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to Laser-D Programming Language’s documentation!" href="index.html" />
@@ -509,27 +510,86 @@ scope, shall be looked up in the enclosing scopes of the module where the templa
 </div>
 <div class="section" id="primary-expressions">
 <h2>Primary expressions<a class="headerlink" href="#primary-expressions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PrimaryExpression</span>   <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;.&quot;</span> <span class="p">]</span> <span class="n">identifier</span> <span class="o">|</span> <span class="p">[</span> <span class="s2">&quot;.&quot;</span> <span class="p">]</span> <span class="n">TemplateInstance</span> <span class="o">|</span> <span class="s2">&quot;this&quot;</span> <span class="o">|</span> <span class="s2">&quot;null&quot;</span> <span class="o">|</span> <span class="s2">&quot;true&quot;</span> <span class="o">|</span> <span class="s2">&quot;false&quot;</span> <span class="o">|</span>
+                      <span class="n">IntegerLiteral</span> <span class="o">|</span> <span class="n">FloatLiteral</span> <span class="o">|</span> <span class="n">CharacterLiteral</span> <span class="o">|</span> <span class="n">StringLiteral</span> <span class="o">|</span> <span class="n">FunctionLiteral</span> <span class="o">|</span>
+                      <span class="n">AssertExpression</span> <span class="o">|</span> <span class="n">BasicType</span> <span class="s2">&quot;.&quot;</span> <span class="n">identifier</span> <span class="o">|</span> <span class="n">BasicType</span> <span class="s2">&quot;(&quot;</span> <span class="n">Arguments</span> <span class="s2">&quot;)&quot;</span> <span class="o">|</span>
+                      <span class="n">TypeOfExpression</span> <span class="o">|</span> <span class="n">IsExpression</span> <span class="o">|</span> <span class="s2">&quot;(&quot;</span> <span class="n">Expression</span> <span class="s2">&quot;)&quot;</span> <span class="o">|</span> <span class="n">SpecialKeyword</span> <span class="o">|</span> <span class="n">TraitsExpression</span> <span class="o">.</span>
+<span class="n">TypeOfExpression</span>    <span class="o">=</span> <span class="s2">&quot;typeof&quot;</span> <span class="s2">&quot;(&quot;</span> <span class="p">(</span> <span class="n">Expression</span> <span class="o">|</span> <span class="s2">&quot;return&quot;</span> <span class="p">)</span> <span class="s2">&quot;)&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
+<div class="section" id="isexpression">
+<h3>IsExpression<a class="headerlink" href="#isexpression" title="Permalink to this headline">¶</a></h3>
 <p>todo</p>
+</div>
+<div class="section" id="traitsexpression">
+<h3>TraitsExpression<a class="headerlink" href="#traitsexpression" title="Permalink to this headline">¶</a></h3>
+<p>todo</p>
+</div>
 </div>
 <div class="section" id="index-expressions">
 <h2>Index expressions<a class="headerlink" href="#index-expressions" title="Permalink to this headline">¶</a></h2>
-<p>todo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IndexExpression</span>     <span class="o">=</span> <span class="n">PostfixExpression</span> <span class="s2">&quot;[&quot;</span> <span class="n">Arguments</span> <span class="s2">&quot;]&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="slice-expressions">
 <h2>Slice expressions<a class="headerlink" href="#slice-expressions" title="Permalink to this headline">¶</a></h2>
-<p>todo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SliceExpression</span>     <span class="o">=</span> <span class="n">PostfixExpression</span> <span class="s2">&quot;[&quot;</span> <span class="p">[</span> <span class="n">Slices</span> <span class="p">]</span> <span class="s2">&quot;]&quot;</span> <span class="o">.</span>
+<span class="n">Slice</span>               <span class="o">=</span> <span class="n">AssignmentExpression</span> <span class="p">[</span> <span class="o">..</span> <span class="n">AssignmentExpression</span> <span class="p">]</span> <span class="o">.</span>
+<span class="n">Slices</span>              <span class="o">=</span> <span class="n">Slice</span> <span class="p">{</span> <span class="s2">&quot;,&quot;</span> <span class="n">Slice</span> <span class="p">}</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binary-expressions">
+<h2>Binary expressions<a class="headerlink" href="#binary-expressions" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binary_op</span>     <span class="o">=</span> <span class="s2">&quot;||&quot;</span> <span class="o">|</span> <span class="s2">&quot;&amp;&amp;&quot;</span> <span class="o">|</span> <span class="n">rel_op</span> <span class="o">|</span> <span class="n">add_op</span> <span class="o">|</span> <span class="n">mul_op</span> <span class="o">|</span> <span class="n">bit_op</span> <span class="o">.</span>
+<span class="n">rel_op</span>        <span class="o">=</span> <span class="s2">&quot;==&quot;</span> <span class="o">|</span> <span class="s2">&quot;!=&quot;</span> <span class="o">|</span> <span class="s2">&quot;&lt;&quot;</span> <span class="o">|</span> <span class="s2">&quot;&lt;=&quot;</span> <span class="o">|</span> <span class="s2">&quot;&gt;&quot;</span> <span class="o">|</span> <span class="s2">&quot;&gt;=&quot;</span> <span class="o">.</span>
+<span class="n">add_op</span>        <span class="o">=</span> <span class="s2">&quot;+&quot;</span> <span class="o">|</span> <span class="s2">&quot;-&quot;</span> <span class="o">.</span>
+<span class="n">mul_op</span>        <span class="o">=</span> <span class="s2">&quot;*&quot;</span> <span class="o">|</span> <span class="s2">&quot;/&quot;</span> <span class="o">|</span> <span class="s2">&quot;%&quot;</span> <span class="o">.</span>
+<span class="n">bit_op</span>        <span class="o">=</span> <span class="s2">&quot;&lt;&lt;&quot;</span> <span class="o">|</span> <span class="s2">&quot;&gt;&gt;&quot;</span> <span class="o">|</span> <span class="s2">&quot;&gt;&gt;&gt;&quot;</span> <span class="o">|</span> <span class="s2">&quot;|&quot;</span> <span class="o">|</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">|</span> <span class="s2">&quot;^&quot;</span> <span class="o">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="arithmetic-operators">
 <h2>Arithmetic operators<a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h2>
-<p>todo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>        <span class="nb">sum</span>
+<span class="o">-</span>        <span class="n">difference</span>
+<span class="o">*</span>        <span class="n">product</span>
+<span class="o">/</span>        <span class="n">quotient</span>
+<span class="o">%</span>        <span class="n">modulus</span>
+
+<span class="o">&lt;&lt;</span>       <span class="n">left</span> <span class="n">shift</span>
+<span class="o">&gt;&gt;</span>       <span class="n">signed</span> <span class="n">right</span> <span class="n">shift</span>
+<span class="o">&gt;&gt;&gt;</span>      <span class="n">unsigned</span> <span class="n">right</span> <span class="n">shift</span>
+
+<span class="o">|</span>        <span class="n">bitwise</span> <span class="ow">or</span>
+<span class="o">&amp;</span>        <span class="n">bitwise</span> <span class="ow">and</span>
+<span class="o">^</span>        <span class="n">bitwise</span> <span class="n">xor</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="comparison-operators">
 <h2>Comparison operators<a class="headerlink" href="#comparison-operators" title="Permalink to this headline">¶</a></h2>
-<p>todo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span>        <span class="n">less</span> <span class="n">than</span>
+<span class="o">&lt;=</span>       <span class="n">less</span> <span class="ow">or</span> <span class="n">equal</span> <span class="n">to</span>
+<span class="o">&gt;</span>        <span class="n">greater</span> <span class="n">than</span>
+<span class="o">&gt;=</span>       <span class="n">greater</span> <span class="n">than</span> <span class="ow">or</span> <span class="n">equal</span> <span class="n">to</span>
+<span class="o">==</span>       <span class="n">equal</span>
+<span class="o">!=</span>       <span class="ow">not</span> <span class="n">equal</span>
+<span class="ow">is</span>       <span class="n">equal</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="logical-operators">
 <h2>Logical operators<a class="headerlink" href="#logical-operators" title="Permalink to this headline">¶</a></h2>
-<p>todo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&amp;&amp;       and
+||       or
+!        not
+</pre></div>
+</div>
 </div>
 <div class="section" id="address-operators">
 <h2>Address operators<a class="headerlink" href="#address-operators" title="Permalink to this headline">¶</a></h2>
@@ -708,6 +768,8 @@ or references.</p>
 <li class="toctree-l2"><a class="reference internal" href="#primary-expressions">Primary expressions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#index-expressions">Index expressions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slice-expressions">Slice expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#binary-expressions">Binary expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#arithmetic-operators">Arithmetic operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#comparison-operators">Comparison operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#logical-operators">Logical operators</a></li>
@@ -759,7 +821,7 @@ or references.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -776,7 +838,7 @@ or references.</p>
       &copy;2020, Dibyendu Majumdar, D Language Foundation.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

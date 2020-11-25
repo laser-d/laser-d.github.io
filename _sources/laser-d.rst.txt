@@ -562,27 +562,104 @@ todo
 
 Primary expressions
 -------------------
+
+::
+
+    PrimaryExpression   = [ "." ] identifier | [ "." ] TemplateInstance | "this" | "null" | "true" | "false" |
+                          IntegerLiteral | FloatLiteral | CharacterLiteral | StringLiteral | FunctionLiteral |
+                          AssertExpression | BasicType "." identifier | BasicType "(" Arguments ")" |
+                          TypeOfExpression | IsExpression | "(" Expression ")" | SpecialKeyword | TraitsExpression .
+    TypeOfExpression    = "typeof" "(" ( Expression | "return" ) ")" .
+
+
+IsExpression
+++++++++++++
+
+todo
+
+TraitsExpression
+++++++++++++++++
+
 todo
 
 Index expressions
 -----------------
-todo
+
+::
+
+    IndexExpression     = PostfixExpression "[" Arguments "]" .
+
 
 Slice expressions
 -----------------
-todo
+
+::
+
+    SliceExpression     = PostfixExpression "[" [ Slices ] "]" .
+    Slice               = AssignmentExpression [ .. AssignmentExpression ] .
+    Slices              = Slice { "," Slice } .
+
+Binary expressions
+------------------
+
+
+Operators
+---------
+
+
+::
+
+    binary_op     = "||" | "&&" | rel_op | add_op | mul_op | bit_op .
+    rel_op        = "==" | "!=" | "<" | "<=" | ">" | ">=" .
+    add_op        = "+" | "-" .
+    mul_op        = "*" | "/" | "%" .
+    bit_op        = "<<" | ">>" | ">>>" | "|" | "&" | "^" .
 
 Arithmetic operators
 --------------------
-todo
+
+::
+
+    +        sum
+    -        difference
+    *        product
+    /        quotient
+    %        modulus
+
+    <<       left shift
+    >>       signed right shift
+    >>>      unsigned right shift
+
+    |        bitwise or
+    &        bitwise and
+    ^        bitwise xor
 
 Comparison operators
 --------------------
-todo
+
+::
+
+    <        less than
+    <=       less or equal to
+    >        greater than
+    >=       greater than or equal to
+    ==       equal
+    !=       not equal
+    is       equal
+
 
 Logical operators
 -----------------
-todo
+
+::
+
+    &&       and
+    ||       or
+    !        not
+
+
+
+
 
 Address operators
 -----------------
