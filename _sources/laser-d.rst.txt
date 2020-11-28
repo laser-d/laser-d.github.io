@@ -7,7 +7,7 @@ does not support the standard D library phobos for the same reason.
 
 Here is a hello world program in Laser-D.
 
-::
+.. code-block:: D
 
     import core.stdc.stdio : printf;
 
@@ -171,12 +171,12 @@ todo
 
 Names
 =====
-In a Laser-D program, identifiers can be used to denote:
+In a Laser-D program, identifiers can be used to name:
 
 * modules
 * structures and union types
 * template types and template parameters
-* functions and function arguments
+* functions and function parameters
 * aliases
 * labels
 * variables
@@ -189,10 +189,68 @@ The same identifier can denote different entities at different points in the pro
 
 Scope
 -----
-An identifier is visible (i.e., can be used) only within a region of program text 
+A name is visible (i.e., can be used) within a region of program text 
 called its scope. There are following kinds of scopes: global, module, struct or union type, template, function, block. 
 
-Different entities designated by the same identifier either have different scopes, or the identifiers must be in an overload set.
+Names declared in one module can be imported into another moduke using the ``import`` statement.
+
+Different entities named by the same identifier either have different scopes (there is a further restriction for functions as described below), 
+or the names must be in an overload set.
+
+For example, a variable and a type of the same name conflict if declared inside the same scope.
+
+.. code-block:: D
+
+    int foo;
+    struct foo { // Error: struct foo conflicts with variable foo
+        int a;
+    }
+
+Similarly, a function and a type declared with the same name conflict if declared inside the same scope.
+
+.. code-block:: D
+
+    struct foo {
+        int a;
+    }
+    void foo() {} // Error: function foo conflicts with struct foo
+
+Additionally, inside a function, a name declared inside a block cannot hide or shadow another name declared in an enclosing block. This includes function parameters. 
+
+.. code-block:: D
+
+    void foo(int x) {
+        int x; // illegal, x shadows parameter x
+        int y;
+        { int y; } // illegal, y shadows enclosing scope's y
+    }
+
+Overload sets
++++++++++++++
+A function name can be redeclared in the same scope provided the declarations have different parameters. The multiple declarations form an overload set.
+
+.. code-block:: D
+
+    void foo() { }
+    void foo(long i) { } // A.foo() and A.foo(long) form an overload set
+
+An overload set declared in one module is distinct from an overload set declared in a different module.
+
+.. code-block:: D
+
+    module A;
+    void foo(long i) { }
+
+    module B;
+    void foo(int i) { }
+
+    module C;
+    import A;
+    import B;
+    void bar()
+    {
+        foo(1);   // error, matches A.foo(long) and B.foo(int)
+    }
 
 Declarations
 ------------
@@ -464,7 +522,7 @@ Initialization
 A variable of struct type is by default initialized to the values specified as the initializer for each data member, or if no such
 value was specified, then to the default initial value of the data member type.
 
-::
+.. code-block:: D
 
     struct S { int a = 4; int b; }
     S x; // x.a is set to 4, x.b to 0
@@ -474,7 +532,7 @@ Constructors
 A constructor is defined with a function name of ``this`` and must have no return value. At least one parameter must be specified.
 A struct constructor can be invoked by the name of the struct followed by its parameters.
 
-::
+.. code-block:: D
     
     struct S
     {
@@ -503,7 +561,7 @@ A C++ abstract class or class type can be declared using following syntax::
 
 Variables of C++ class type are pointers rather than value objects.
 
-::
+.. code-block:: D
 
     extern (C++) class A {int a;}
     extern (C) void main() {

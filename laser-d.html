@@ -38,11 +38,11 @@
 garbage collection and does not provide a runtime. As a consequence, Laser-D does not support certain features of the D programming language. Laser-D
 does not support the standard D library phobos for the same reason.</p>
 <p>Here is a hello world program in Laser-D.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">core.stdc.stdio</span> <span class="p">:</span> <span class="n">printf</span><span class="p">;</span>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">core</span><span class="p">.</span><span class="n">stdc</span><span class="p">.</span><span class="n">stdio</span> <span class="p">:</span> <span class="n">printf</span><span class="p">;</span>
 
-<span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="k">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello World!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World!\n&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -175,12 +175,12 @@ digit    = &quot;0&quot; … &quot;9&quot; .
 </div>
 <div class="section" id="names">
 <h1>Names<a class="headerlink" href="#names" title="Permalink to this headline">¶</a></h1>
-<p>In a Laser-D program, identifiers can be used to denote:</p>
+<p>In a Laser-D program, identifiers can be used to name:</p>
 <ul class="simple">
 <li><p>modules</p></li>
 <li><p>structures and union types</p></li>
 <li><p>template types and template parameters</p></li>
-<li><p>functions and function arguments</p></li>
+<li><p>functions and function parameters</p></li>
 <li><p>aliases</p></li>
 <li><p>labels</p></li>
 <li><p>variables</p></li>
@@ -192,9 +192,57 @@ digit    = &quot;0&quot; … &quot;9&quot; .
 <p>The same identifier can denote different entities at different points in the program.</p>
 <div class="section" id="scope">
 <h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
-<p>An identifier is visible (i.e., can be used) only within a region of program text
+<p>A name is visible (i.e., can be used) within a region of program text
 called its scope. There are following kinds of scopes: global, module, struct or union type, template, function, block.</p>
-<p>Different entities designated by the same identifier either have different scopes, or the identifiers must be in an overload set.</p>
+<p>Names declared in one module can be imported into another moduke using the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement.</p>
+<p>Different entities named by the same identifier either have different scopes (there is a further restriction for functions as described below),
+or the names must be in an overload set.</p>
+<p>For example, a variable and a type of the same name conflict if declared inside the same scope.</p>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">foo</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">foo</span> <span class="p">{</span> <span class="c1">// Error: struct foo conflicts with variable foo</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Similarly, a function and a type declared with the same name conflict if declared inside the same scope.</p>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">foo</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// Error: function foo conflicts with struct foo</span>
+</pre></div>
+</div>
+<p>Additionally, inside a function, a name declared inside a block cannot hide or shadow another name declared in an enclosing block. This includes function parameters.</p>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// illegal, x shadows parameter x</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">{</span> <span class="kt">int</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// illegal, y shadows enclosing scope&#39;s y</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="overload-sets">
+<h3>Overload sets<a class="headerlink" href="#overload-sets" title="Permalink to this headline">¶</a></h3>
+<p>A function name can be redeclared in the same scope provided the declarations have different parameters. The multiple declarations form an overload set.</p>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="kt">void</span> <span class="n">foo</span><span class="p">(</span><span class="kt">long</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span> <span class="c1">// A.foo() and A.foo(long) form an overload set</span>
+</pre></div>
+</div>
+<p>An overload set declared in one module is distinct from an overload set declared in a different module.</p>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="n">A</span><span class="p">;</span>
+<span class="kt">void</span> <span class="n">foo</span><span class="p">(</span><span class="kt">long</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="k">module</span> <span class="n">B</span><span class="p">;</span>
+<span class="kt">void</span> <span class="n">foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="k">module</span> <span class="n">C</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">A</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">B</span><span class="p">;</span>
+<span class="kt">void</span> <span class="n">bar</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>   <span class="c1">// error, matches A.foo(long) and B.foo(int)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="declarations">
 <h2>Declarations<a class="headerlink" href="#declarations" title="Permalink to this headline">¶</a></h2>
@@ -426,8 +474,8 @@ Implementation alignment requirements might cause two adjacent members not to be
 <h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
 <p>A variable of struct type is by default initialized to the values specified as the initializer for each data member, or if no such
 value was specified, then to the default initial value of the data member type.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">S</span> <span class="p">{</span> <span class="nb">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="nb">int</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
-<span class="n">S</span> <span class="n">x</span><span class="p">;</span> <span class="o">//</span> <span class="n">x</span><span class="o">.</span><span class="n">a</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">to</span> <span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">b</span> <span class="n">to</span> <span class="mi">0</span>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">S</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span> <span class="kt">int</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">S</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// x.a is set to 4, x.b to 0</span>
 </pre></div>
 </div>
 </div>
@@ -435,21 +483,21 @@ value was specified, then to the default initial value of the data member type.<
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h3>
 <p>A constructor is defined with a function name of <code class="docutils literal notranslate"><span class="pre">this</span></code> and must have no return value. At least one parameter must be specified.
 A struct constructor can be invoked by the name of the struct followed by its parameters.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">S</span>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">S</span>
 <span class="p">{</span>
-    <span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
-    <span class="n">this</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">,</span> <span class="nb">int</span> <span class="n">b</span><span class="p">)</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">z</span> <span class="p">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">x</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
+        <span class="n">y</span> <span class="p">=</span> <span class="n">b</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="k">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">S</span> <span class="n">a</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="o">//</span> <span class="n">calls</span> <span class="n">S</span><span class="o">.</span><span class="n">this</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>  <span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">6</span>
-    <span class="n">S</span> <span class="n">b</span> <span class="o">=</span> <span class="n">S</span><span class="p">();</span>  <span class="o">//</span> <span class="n">default</span> <span class="n">initialized</span><span class="p">:</span>    <span class="n">b</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">6</span>
-    <span class="n">S</span> <span class="n">c</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">//</span> <span class="n">error</span><span class="p">,</span> <span class="n">matching</span> <span class="n">this</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="ow">not</span> <span class="n">found</span>
+    <span class="n">S</span> <span class="n">a</span> <span class="p">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// calls S.this(4, 5):  a.x = 4, a.y = 5, a.z = 6</span>
+    <span class="n">S</span> <span class="n">b</span> <span class="p">=</span> <span class="n">S</span><span class="p">();</span>  <span class="c1">// default initialized:    b.x = 0, b.y = 4, b.z = 6</span>
+    <span class="n">S</span> <span class="n">c</span> <span class="p">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// error, matching this(int) not found</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -462,10 +510,10 @@ A struct constructor can be invoked by the name of the struct followed by its pa
 </pre></div>
 </div>
 <p>Variables of C++ class type are pointers rather than value objects.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="o">++</span><span class="p">)</span> <span class="k">class</span> <span class="nc">A</span> <span class="p">{</span><span class="nb">int</span> <span class="n">a</span><span class="p">;}</span>
-<span class="n">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">void</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-D notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">++)</span> <span class="k">class</span> <span class="n">A</span> <span class="p">{</span><span class="kt">int</span> <span class="n">a</span><span class="p">;}</span>
+<span class="k">extern</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="kt">void</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">A</span> <span class="n">a</span><span class="p">;</span>
-    <span class="k">assert</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="o">//</span> <span class="n">will</span> <span class="n">fail</span> <span class="k">as</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">null</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="c1">// will fail as a is null</span>
 <span class="p">}</span>
 </pre></div>
 </div>
