@@ -189,12 +189,12 @@ The same identifier can denote different entities at different points in the pro
 
 Scope
 -----
-A name is visible (i.e., can be used) within a region of program text 
-called its scope. There are following kinds of scopes: global, module, struct or union type, template, function, block. 
+A name is visible (i.e., can be used) within a region of program text called its scope. There are following kinds of scopes: 
+global, module, struct or union type, template, function, block. 
 
-Names declared in one module can be imported into another moduke using the ``import`` statement.
+Names declared in one module can be imported into another module using the ``import`` statement.
 
-Different entities named by the same identifier either have different scopes (there is a further restriction for functions as described below), 
+Different entities named by the same identifier either have different scopes (although there is a further restriction for functions as described below), 
 or the names must be in an overload set.
 
 For example, a variable and a type of the same name conflict if declared inside the same scope.
@@ -215,7 +215,7 @@ Similarly, a function and a type declared with the same name conflict if declare
     }
     void foo() {} // Error: function foo conflicts with struct foo
 
-Additionally, inside a function, a name declared inside a block cannot hide or shadow another name declared in an enclosing block. This includes function parameters. 
+Additionally, inside a function, a name declared inside a block cannot hide or shadow another name declared in an enclosing block, including function parameters. 
 
 .. code-block:: D
 
@@ -231,6 +231,7 @@ A function name can be redeclared in the same scope provided the declarations ha
 
 .. code-block:: D
 
+    module A;
     void foo() { }
     void foo(long i) { } // A.foo() and A.foo(long) form an overload set
 
@@ -238,12 +239,15 @@ An overload set declared in one module is distinct from an overload set declared
 
 .. code-block:: D
 
-    module A;
+    // file A.d
+    module A; 
     void foo(long i) { }
 
+    // file B.d
     module B;
     void foo(int i) { }
 
+    // file C.d
     module C;
     import A;
     import B;
